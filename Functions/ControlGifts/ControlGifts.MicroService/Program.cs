@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ControlGifts.MicroService
+namespace SAM.Functions.ControlGifts.MicroService
 {
     public class Program
     {

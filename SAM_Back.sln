@@ -9,21 +9,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Functions", "Functions", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{54AF87DF-07E5-4A44-9149-CF1E6D1ED075}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authorization.MicroService", "Functions\Authorization.MicroService\Authorization.MicroService.csproj", "{1DE4D899-3415-44F8-95E7-84D2005D1867}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Authorization.MicroService", "Functions\Authorization.MicroService\Authorization.MicroService.csproj", "{1DE4D899-3415-44F8-95E7-84D2005D1867}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Data", "Core\Core.Data\Core.Data.csproj", "{218E5559-0245-436A-AB9C-93BBA1EC75FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Data", "Core\Core.Data\Core.Data.csproj", "{218E5559-0245-436A-AB9C-93BBA1EC75FA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ControlGifts", "ControlGifts", "{2402D3D8-8F27-41CB-9412-8B3B79402F4D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlGift.Business", "Functions\ControlGifts\ControlGift.Business\ControlGift.Business.csproj", "{ACCFE20E-95A8-4E66-8645-41D844B7759C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ControlGift.Business", "Functions\ControlGifts\ControlGift.Business\ControlGift.Business.csproj", "{ACCFE20E-95A8-4E66-8645-41D844B7759C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlGifts.MicroService", "Functions\ControlGifts\ControlGifts.MicroService\ControlGifts.MicroService.csproj", "{CC0FB3D3-7935-45AF-9FD4-BD080A03EC7E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ControlGifts.MicroService", "Functions\ControlGifts\ControlGifts.MicroService\ControlGifts.MicroService.csproj", "{CC0FB3D3-7935-45AF-9FD4-BD080A03EC7E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ResolveCasesSiver", "ResolveCasesSiver", "{B4B9D371-E163-4FFE-B5B6-74FBB4AAF623}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResolveCasesSiver.Business", "Functions\ResolveCaseSiver\ResolveCasesSiver.Business\ResolveCasesSiver.Business.csproj", "{BC5F2328-580F-4648-971B-891233D4C490}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ResolveCasesSiver.Business", "Functions\ResolveCaseSiver\ResolveCasesSiver.Business\ResolveCasesSiver.Business.csproj", "{BC5F2328-580F-4648-971B-891233D4C490}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResolveCasesSiver.MicroService", "Functions\ResolveCaseSiver\ResolveCasesSiver.MicroService\ResolveCasesSiver.MicroService.csproj", "{8553372B-A0F9-4CFE-A010-3CE2E6FC56A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ResolveCasesSiver.MicroService", "Functions\ResolveCaseSiver\ResolveCasesSiver.MicroService\ResolveCasesSiver.MicroService.csproj", "{8553372B-A0F9-4CFE-A010-3CE2E6FC56A1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BeneficiariesFocusMap", "BeneficiariesFocusMap", "{037F3244-7AC2-405F-88AB-201051DA1EB7}"
 EndProject
@@ -31,15 +31,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Investments", "Investments"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ReturnsASR", "ReturnsASR", "{3DE3744D-6EDE-4115-BD74-D554A68A62F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Business", "Core\Core.Business\Core.Business.csproj", "{0BFAE67C-DB72-4F2A-B450-B35F6803DFBE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Business", "Core\Core.Business\Core.Business.csproj", "{0BFAE67C-DB72-4F2A-B450-B35F6803DFBE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeneficiariesFocusMap.Business", "Functions\BeneficiariesFocusMap\BeneficiariesFocusMap.Business\BeneficiariesFocusMap.Business.csproj", "{333E3043-D3C2-4E98-8198-95EB05D54121}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BeneficiariesFocusMap.Business", "Functions\BeneficiariesFocusMap\BeneficiariesFocusMap.Business\BeneficiariesFocusMap.Business.csproj", "{333E3043-D3C2-4E98-8198-95EB05D54121}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeneficiariesFocusMap.MicroService", "Functions\BeneficiariesFocusMap\BeneficiariesFocusMap.MicroService\BeneficiariesFocusMap.MicroService.csproj", "{00F51CD9-47CC-4888-B548-FB5352F4E3AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BeneficiariesFocusMap.MicroService", "Functions\BeneficiariesFocusMap\BeneficiariesFocusMap.MicroService\BeneficiariesFocusMap.MicroService.csproj", "{00F51CD9-47CC-4888-B548-FB5352F4E3AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReturnsASR.Business", "Functions\Investments\ReturnsASR\ReturnsASR.Business\ReturnsASR.Business.csproj", "{662089B4-C0D6-44A5-8D3F-017BB14022D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReturnsASR.Business", "Functions\Investments\ReturnsASR\ReturnsASR.Business\ReturnsASR.Business.csproj", "{662089B4-C0D6-44A5-8D3F-017BB14022D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReturnsASR.MicroService", "Functions\Investments\ReturnsASR\ReturnsASR.MicroService\ReturnsASR.MicroService.csproj", "{3AEDDB06-E496-42EC-AA35-297182789E33}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReturnsASR.MicroService", "Functions\Investments\ReturnsASR\ReturnsASR.MicroService\ReturnsASR.MicroService.csproj", "{3AEDDB06-E496-42EC-AA35-297182789E33}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.AuthConfig", "Core\Core.AuthConfig\Core.AuthConfig.csproj", "{3DC98F81-A006-4130-BFB5-CD1F7D159C27}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.SwaggerConfig", "Core\Core.SwaggerConfig\Core.SwaggerConfig.csproj", "{DCA89F4A-D590-4FAD-97BA-C601762F0BB9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -91,6 +95,14 @@ Global
 		{3AEDDB06-E496-42EC-AA35-297182789E33}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3AEDDB06-E496-42EC-AA35-297182789E33}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3AEDDB06-E496-42EC-AA35-297182789E33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DC98F81-A006-4130-BFB5-CD1F7D159C27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DC98F81-A006-4130-BFB5-CD1F7D159C27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DC98F81-A006-4130-BFB5-CD1F7D159C27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DC98F81-A006-4130-BFB5-CD1F7D159C27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCA89F4A-D590-4FAD-97BA-C601762F0BB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCA89F4A-D590-4FAD-97BA-C601762F0BB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCA89F4A-D590-4FAD-97BA-C601762F0BB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCA89F4A-D590-4FAD-97BA-C601762F0BB9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -112,6 +124,8 @@ Global
 		{00F51CD9-47CC-4888-B548-FB5352F4E3AF} = {037F3244-7AC2-405F-88AB-201051DA1EB7}
 		{662089B4-C0D6-44A5-8D3F-017BB14022D6} = {3DE3744D-6EDE-4115-BD74-D554A68A62F3}
 		{3AEDDB06-E496-42EC-AA35-297182789E33} = {3DE3744D-6EDE-4115-BD74-D554A68A62F3}
+		{3DC98F81-A006-4130-BFB5-CD1F7D159C27} = {C7351F0B-E10D-419E-B3CA-A89EAAD1ED18}
+		{DCA89F4A-D590-4FAD-97BA-C601762F0BB9} = {C7351F0B-E10D-419E-B3CA-A89EAAD1ED18}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9111D983-DAF8-4700-B3FB-1DC7024BE0CC}

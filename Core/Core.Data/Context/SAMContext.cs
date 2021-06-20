@@ -4,13 +4,14 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Threading.Tasks;
 
 namespace SAM.Core.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, Role, int, UserClaim, UserRole, UserLogin, RoleClaim, UserToken>
+    public class SAMContext : IdentityDbContext<ApplicationUser, Role, int, UserClaim, UserRole, UserLogin, RoleClaim, UserToken>
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+        public SAMContext(DbContextOptions<SAMContext> options) : base(options)
         {
 
         }
@@ -37,6 +38,8 @@ namespace SAM.Core.Data
         public DbSet<AfpPassiveContribution> AfpPassiveContributions { get; set; }
 
         public DbSet<OfficePlace> OfficePlaces { get; set; }
+
+
     }
 
     public class UserLogin : IdentityUserLogin<int>
