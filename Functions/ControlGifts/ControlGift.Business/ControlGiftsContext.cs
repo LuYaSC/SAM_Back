@@ -11,7 +11,7 @@ namespace SAM.Functions.ControlGift.Business
 {
     public class ControlGiftsContext : SAMContext
     {
-        public ControlGiftsContext(DbContextOptions<SAMContext> options) : base(options)
+        public ControlGiftsContext(DbContextOptions options) : base(options)
         {
 
         }

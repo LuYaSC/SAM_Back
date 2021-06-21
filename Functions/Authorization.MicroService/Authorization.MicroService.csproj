@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Core\Core.AuthConfig\Core.AuthConfig.csproj" />
     <ProjectReference Include="..\..\Core\Core.SwaggerConfig\Core.SwaggerConfig.csproj" />
     <ProjectReference Include="..\..\Databases\DbSam\Core.Data\Core.Data.csproj" />
   </ItemGroup>

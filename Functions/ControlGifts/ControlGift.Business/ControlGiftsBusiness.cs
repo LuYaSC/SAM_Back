@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using SAM.Databases.DbSam.Core.Data;
 using SAM.Functions.ControlGifts.MicroService.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -149,17 +150,17 @@ namespace SAM.Functions.ControlGift.Business
 
             foreach (var bef in dto.Beneficiaries)
             {
-                //Context.ControlGifts.Add(new ControlGift
-                //{
-                //    BeneficiaryId = bef,
-                //    DateCreation = DateTime.Now,
-                //    HaveBackpack = dto.HaveBackpack,
-                //    HaveSchedule = dto.HaveSchedule,
-                //    Observations = dto.Observations,
-                //    UserCreation = userId,
-                //    UserModification = userId,
-                //    OfficePlaceId = dto.OfficePlace
-                //});
+                Context.ControlGifts.Add(new Databases.DbSam.Core.Data.ControlGift
+                {
+                    BeneficiaryId = bef,
+                    DateCreation = DateTime.Now,
+                    HaveBackpack = dto.HaveBackpack,
+                    HaveSchedule = dto.HaveSchedule,
+                    Observations = dto.Observations,
+                    UserCreation = userId,
+                    UserModification = userId,
+                    OfficePlaceId = dto.OfficePlace
+                });
                 Context.SaveChanges();
             }
             return new AssingGiftResult

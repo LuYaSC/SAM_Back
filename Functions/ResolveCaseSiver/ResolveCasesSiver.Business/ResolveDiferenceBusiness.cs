@@ -19,7 +19,7 @@ namespace SAM.Functions.ResolveCasesSiver.Business
         public ResolveDiferenceResult GetCaseData(ResolveDiferenceDto dto)
         {
             ResolveDiferenceResult result = new ResolveDiferenceResult();
-            var listSiver = Context.MumanalDatos.Where(x => x.cedula_identidad == dto.DocumentNumber).ToList();
+            var listSiver = Context.MumanalActiveContributions.Where(x => x.cedula_identidad == dto.DocumentNumber).ToList();
             var listMinistery = Context.MinistryActiveContributions.Where(x => x.CARNET_AA == dto.DocumentNumber).ToList();
 
             var b = listMinistery.GroupBy(d => d.FECHAAPORTES_AA)
@@ -80,7 +80,7 @@ namespace SAM.Functions.ResolveCasesSiver.Business
         public ResolveDiferenceResult GetCaseDataBC(ResolveDiferenceDto dto)
         {
             ResolveDiferenceResult result = new ResolveDiferenceResult();
-            var listSiver = Context.BonoCesantiaDatos.Where(x => x.CodigoBase == dto.CodBase).ToList();
+            var listSiver = Context.SeveranceBonusContributions.Where(x => x.CodigoBase == dto.CodBase).ToList();
             var listMinistery = Context.MinistryActiveContributions.Where(x => x.CARNET_AA == dto.DocumentNumber).ToList();
 
             var b = listMinistery.GroupBy(d => d.FECHAAPORTES_AA)
@@ -181,7 +181,7 @@ namespace SAM.Functions.ResolveCasesSiver.Business
             List<ResolveDiferenceMassiveResult> result = new List<ResolveDiferenceMassiveResult>();
             foreach (var search in dto.Documents)
             {
-                var listSiver = Context.MumanalDatos.Where(x => x.cedula_identidad == search).ToList();
+                var listSiver = Context.MumanalActiveContributions.Where(x => x.cedula_identidad == search).ToList();
                 var listMinistery = Context.MinistryActiveContributions.Where(x => x.CARNET_AA == search).ToList();
 
                 var b = listMinistery.GroupBy(d => d.FECHAAPORTES_AA)
@@ -246,7 +246,7 @@ namespace SAM.Functions.ResolveCasesSiver.Business
         public GetPassiveAportsResponse UnificationPassiveAports(GetPassiveAportsDto dto)
         {
             GetPassiveAportsResponse result = new GetPassiveAportsResponse();
-            var beneficiaries = Context.BeneficiariosPasivos.Where(x => x.cedula_identidad == dto.DocumentNumber).ToList();
+            var beneficiaries = Context.MumanalPassiveBeneficiaries.Where(x => x.cedula_identidad == dto.DocumentNumber).ToList();
             var lastMat = beneficiaries.Last();
             var firtMat = beneficiaries.First();
             List<MinistryPassiveContribution> MinisteryData = new List<MinistryPassiveContribution>();
@@ -297,8 +297,8 @@ namespace SAM.Functions.ResolveCasesSiver.Business
         public ResolveDiferenceMassiveResult CompletePassiveAports(GetPassiveAportsDto dto)
         {
             ResolveDiferenceMassiveResult result = new ResolveDiferenceMassiveResult();
-            var user = Context.BeneficiariosPasivos.Where(x => x.cedula_identidad == dto.DocumentNumber).FirstOrDefault();
-            var mumAports = Context.MumanalAportesPasivos.Where(x => x.cedula_identidad == user.cedula_identidad).ToList();
+            var user = Context.MumanalPassiveBeneficiaries.Where(x => x.cedula_identidad == dto.DocumentNumber).FirstOrDefault();
+            var mumAports = Context.MumanalPassiveContributions.Where(x => x.cedula_identidad == user.cedula_identidad).ToList();
             var minAports = Context.MinistryPassiveContributions.Where(x => x.T_MATRICULA_AP == user.mat_titular).ToList();
             int count = 0;
             foreach (var data in minAports)

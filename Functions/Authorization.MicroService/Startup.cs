@@ -9,8 +9,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using SAM.Core.AuthConfig;
 using SAM.Core.SwaggerConfig;
 using SAM.Databases.DbSam.Core.Data;
+using SAM.Databases.DbSam.Core.Data.Config;
+using SAM.Databases.DbSam.Core.Data.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,25 +37,9 @@ namespace SAM.Functions.Authorization.MicroService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddDbContext<AuthContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ConnStr")));
-
-
-            //For Identity  
-            services.AddIdentity<ApplicationUser, Role>()
-                .AddEntityFrameworkStores<AuthContext>()
-                .AddDefaultTokenProviders();
-
+            DataConfig<AuthContext>.Configure(services, Configuration);
+            AuthConfig.Configure(services, Configuration);
             SwaggerConfig.Configure(services, Configuration);
-            services.AddCors(options =>
-            {
-                options.AddPolicy("CorsDevPolicy", builder =>
-                {
-                    builder.WithOrigins("*")
-                        .WithMethods("POST")
-                        .AllowAnyHeader();
-                });
-
-            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -68,6 +55,9 @@ namespace SAM.Functions.Authorization.MicroService
             app.UseHttpsRedirection();
             app.UseCors("CorsDevPolicy");
             app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

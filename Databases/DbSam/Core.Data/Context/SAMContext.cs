@@ -11,7 +11,7 @@ namespace SAM.Databases.DbSam.Core.Data.Context
 {
     public class SAMContext : IdentityDbContext<ApplicationUser, Role, int, UserClaim, UserRole, UserLogin, RoleClaim, UserToken>
     {
-        public SAMContext(DbContextOptions<SAMContext> options) : base(options)
+        public SAMContext(DbContextOptions options) : base(options)
         {
 
         }
