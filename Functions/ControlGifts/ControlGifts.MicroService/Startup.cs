@@ -26,8 +26,10 @@ namespace SAM.Functions.ControlGifts.MicroService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
             services.AddTransient<IPrincipal>(provider => provider.GetService<IHttpContextAccessor>().HttpContext.User);
             services.AddTransient<IControlGiftsBusiness, ControlGiftsBusiness>();
+
             DataConfig<ControlGiftsContext>.Configure(services, Configuration);
             AuthConfig.Configure(services, Configuration);
             SwaggerConfig.Configure(services, Configuration);

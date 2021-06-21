@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SAM.Databases.DbSam.Core.Data.Context;
@@ -29,8 +30,9 @@ namespace SAM.Databases.DbSam.Core.Data.Config
         {
             services.AddDbContext<CONTEXT>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentityCore<ApplicationUser>()
-                    .AddEntityFrameworkStores<CONTEXT>();
+            services.AddIdentity<ApplicationUser, Role>()
+               .AddEntityFrameworkStores<CONTEXT>()
+               .AddDefaultTokenProviders();
         }
     }
 }

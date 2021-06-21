@@ -6,9 +6,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SAM.Core.AuthConfig;
 using SAM.Core.SwaggerConfig;
+using SAM.Databases.DbSam.Core.Data.Config;
+using SAM.Functions.ResolveCasesSiver.Business;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Threading.Tasks;
 
 namespace ResolveCasesSiver.MicroService
@@ -26,8 +29,13 @@ namespace ResolveCasesSiver.MicroService
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            AuthConfig.Configure(services, Configuration);
+            services.AddControllers();
 
+            services.AddTransient<IPrincipal>(provider => provider.GetService<IHttpContextAccessor>().HttpContext.User);
+            services.AddTransient<IResolveDiferenceBusiness, ResolveDiferenceBusiness>();
+
+            DataConfig<ResolveCasesSiverContext>.Configure(services, Configuration);
+            AuthConfig.Configure(services, Configuration);
             SwaggerConfig.Configure(services, Configuration);
         }
 
@@ -37,16 +45,21 @@ namespace ResolveCasesSiver.MicroService
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", $"{Configuration.GetSection("SwaggerConfig")["Title"]} {Configuration.GetSection("SwaggerConfig")["Version"]}"));
             }
 
             app.UseRouting();
+            app.UseHttpsRedirection();
+
+            app.UseCors("CorsDevPolicy");
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                endpoints.MapControllers();
             });
         }
     }

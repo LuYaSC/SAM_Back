@@ -13,7 +13,7 @@ namespace SAM.Functions.Authorization.MicroService
 {
     public class AuthContext : SAMContext
     {
-        public AuthContext(DbContextOptions<SAMContext> options) : base(options)
+        public AuthContext(DbContextOptions options) : base(options)
         {
 
         }
