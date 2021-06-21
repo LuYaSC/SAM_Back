@@ -1,11 +1,11 @@
-﻿using SAM.Core.Data;
+﻿using SAM.Databases.DbSam.Core.Data;
 using SAM.Functions.ControlGifts.MicroService.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SAM.Functions.ControlGifts.MicroService.Business
+namespace SAM.Functions.ControlGift.Business
 {
     public interface IControlGiftsBusiness
     {

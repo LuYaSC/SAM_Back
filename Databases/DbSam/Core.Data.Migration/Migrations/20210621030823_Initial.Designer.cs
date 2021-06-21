@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SAM.Core.Data;
+using SAM.Databases.DbSam.Core.Data.MigrationsDb.Context;
 
-namespace Core.Data.Migrations
+namespace SAM.Databases.DbSam.Core.Data.MigrationsDb.Migrations
 {
     [DbContext(typeof(SAMContext))]
-    [Migration("20210619141236_initial")]
-    partial class initial
+    [Migration("20210621030823_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,7 +21,7 @@ namespace Core.Data.Migrations
                 .HasAnnotation("ProductVersion", "5.0.7")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("SAM.Core.Data.AfpPassiveContribution", b =>
+            modelBuilder.Entity("SAM.Databases.DbSam.Core.Data.AfpPassiveContribution", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -113,7 +113,7 @@ namespace Core.Data.Migrations
                     b.ToTable("AfpPassiveContributions");
                 });
 
-            modelBuilder.Entity("SAM.Core.Data.ApplicationUser", b =>
+            modelBuilder.Entity("SAM.Databases.DbSam.Core.Data.ApplicationUser", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -195,7 +195,7 @@ namespace Core.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("SAM.Core.Data.Beneficiary", b =>
+            modelBuilder.Entity("SAM.Databases.DbSam.Core.Data.Beneficiary", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -295,7 +295,7 @@ namespace Core.Data.Migrations
                     b.ToTable("Beneficiaries");
                 });
 
-            modelBuilder.Entity("SAM.Core.Data.BeneficiaryType", b =>
+            modelBuilder.Entity("SAM.Databases.DbSam.Core.Data.BeneficiaryType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -311,10 +311,10 @@ namespace Core.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("BeneficiaryType");
+                    b.ToTable("BeneficiaryTypes");
                 });
 
-            modelBuilder.Entity("SAM.Core.Data.ControlGift", b =>
+            modelBuilder.Entity("SAM.Databases.DbSam.Core.Data.ControlGift", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -365,7 +365,93 @@ namespace Core.Data.Migrations
                     b.ToTable("ControlGifts");
                 });
 
-            modelBuilder.Entity("SAM.Core.Data.MinistryActiveContribution", b =>
+            modelBuilder.Entity("SAM.Databases.DbSam.Core.Data.MigrationsDb.Context.RoleClaim", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims");
+                });
+
+            modelBuilder.Entity("SAM.Databases.DbSam.Core.Data.MigrationsDb.Context.UserClaim", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims");
+                });
+
+            modelBuilder.Entity("SAM.Databases.DbSam.Core.Data.MigrationsDb.Context.UserLogin", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins");
+                });
+
+            modelBuilder.Entity("SAM.Databases.DbSam.Core.Data.MigrationsDb.Context.UserToken", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("SAM.Databases.DbSam.Core.Data.MinistryActiveContribution", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -414,7 +500,7 @@ namespace Core.Data.Migrations
                     b.ToTable("MinistryActiveContributions");
                 });
 
-            modelBuilder.Entity("SAM.Core.Data.MinistryPassiveContribution", b =>
+            modelBuilder.Entity("SAM.Databases.DbSam.Core.Data.MinistryPassiveContribution", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -471,7 +557,231 @@ namespace Core.Data.Migrations
                     b.ToTable("MinistryPassiveContributions");
                 });
 
-            modelBuilder.Entity("SAM.Core.Data.OfficePlace", b =>
+            modelBuilder.Entity("SAM.Databases.DbSam.Core.Data.MumanalActiveContribution", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("aporte")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("cedula_identidad")
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
+
+                    b.Property<string>("cod_base")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ctacte")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("fecha")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("mes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("numbol")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MumanalActiveContributions");
+                });
+
+            modelBuilder.Entity("SAM.Databases.DbSam.Core.Data.MumanalFullActiveBeneficiary", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("apellido_casada")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("cedula_identidad")
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
+
+                    b.Property<string>("cod_base")
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
+
+                    b.Property<string>("distrital")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("obs")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("primer_apellido")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("primer_nombre")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("regional")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("sector")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("segundo_apellido")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("segundo_nombre")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MumanalFullActiveBeneficiaries");
+                });
+
+            modelBuilder.Entity("SAM.Databases.DbSam.Core.Data.MumanalPartialActiveBeneficiary", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CARNET_AA")
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
+
+                    b.Property<string>("COD_BASE")
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
+
+                    b.Property<string>("MATERNO_AA")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("NOMBRE1_AA")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("NOMBRE2_AA")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("PATERNO_AA")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("SECTOR")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MumanalPartialActiveBeneficiaries");
+                });
+
+            modelBuilder.Entity("SAM.Databases.DbSam.Core.Data.MumanalPassiveBeneficiary", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("apellido_casada")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("cedula_identidad")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("cod_base")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("concatenado")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("distrital")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("mat_beneficiario")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("mat_titular")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("obs")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("primer_apellido")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("primer_nombre")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("regional")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("segundo_apellido")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("segundo_nombre")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MumanalPassiveBeneficiaries");
+                });
+
+            modelBuilder.Entity("SAM.Databases.DbSam.Core.Data.MumanalPassiveContribution", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("aporte")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("cedula_identidad")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("cod_base")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("concatenado")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("fecha")
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
+
+                    b.Property<string>("mes")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MumanalPassiveContributions");
+                });
+
+            modelBuilder.Entity("SAM.Databases.DbSam.Core.Data.OfficePlace", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -503,7 +813,7 @@ namespace Core.Data.Migrations
                     b.ToTable("OfficePlaces");
                 });
 
-            modelBuilder.Entity("SAM.Core.Data.Role", b =>
+            modelBuilder.Entity("SAM.Databases.DbSam.Core.Data.Role", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -532,30 +842,7 @@ namespace Core.Data.Migrations
                     b.ToTable("AspNetRoles");
                 });
 
-            modelBuilder.Entity("SAM.Core.Data.RoleClaim", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetRoleClaims");
-                });
-
-            modelBuilder.Entity("SAM.Core.Data.Session", b =>
+            modelBuilder.Entity("SAM.Databases.DbSam.Core.Data.Session", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -580,51 +867,39 @@ namespace Core.Data.Migrations
                     b.ToTable("Sessions");
                 });
 
-            modelBuilder.Entity("SAM.Core.Data.UserClaim", b =>
+            modelBuilder.Entity("SAM.Databases.DbSam.Core.Data.SeveranceBonusContribution", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("CedulaIdentidad")
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
 
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("CodigoBase")
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
 
-                    b.Property<int>("UserId")
+                    b.Property<decimal>("Descuento")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("Fecha")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Mes")
                         .HasColumnType("int");
+
+                    b.Property<decimal>("Sueldo")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
-
-                    b.ToTable("AspNetUserClaims");
+                    b.ToTable("SeveranceBonusContributions");
                 });
 
-            modelBuilder.Entity("SAM.Core.Data.UserLogin", b =>
-                {
-                    b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ProviderDisplayName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("LoginProvider", "ProviderKey");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("AspNetUserLogins");
-                });
-
-            modelBuilder.Entity("SAM.Core.Data.UserRole", b =>
+            modelBuilder.Entity("SAM.Databases.DbSam.Core.Data.UserRole", b =>
                 {
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -653,28 +928,9 @@ namespace Core.Data.Migrations
                     b.ToTable("AspNetUserRoles");
                 });
 
-            modelBuilder.Entity("SAM.Core.Data.UserToken", b =>
+            modelBuilder.Entity("SAM.Databases.DbSam.Core.Data.Beneficiary", b =>
                 {
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("UserId", "LoginProvider", "Name");
-
-                    b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("SAM.Core.Data.Beneficiary", b =>
-                {
-                    b.HasOne("SAM.Core.Data.BeneficiaryType", "BeneficiaryType")
+                    b.HasOne("SAM.Databases.DbSam.Core.Data.BeneficiaryType", "BeneficiaryType")
                         .WithMany()
                         .HasForeignKey("BeneficiaryTypeId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -683,27 +939,27 @@ namespace Core.Data.Migrations
                     b.Navigation("BeneficiaryType");
                 });
 
-            modelBuilder.Entity("SAM.Core.Data.ControlGift", b =>
+            modelBuilder.Entity("SAM.Databases.DbSam.Core.Data.ControlGift", b =>
                 {
-                    b.HasOne("SAM.Core.Data.Beneficiary", "Beneficiary")
+                    b.HasOne("SAM.Databases.DbSam.Core.Data.Beneficiary", "Beneficiary")
                         .WithMany()
                         .HasForeignKey("BeneficiaryId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("SAM.Core.Data.OfficePlace", "OfficePlace")
+                    b.HasOne("SAM.Databases.DbSam.Core.Data.OfficePlace", "OfficePlace")
                         .WithMany()
                         .HasForeignKey("OfficePlaceId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("SAM.Core.Data.ApplicationUser", "UserCreated")
+                    b.HasOne("SAM.Databases.DbSam.Core.Data.ApplicationUser", "UserCreated")
                         .WithMany()
                         .HasForeignKey("UserCreation")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("SAM.Core.Data.ApplicationUser", "UserModificated")
+                    b.HasOne("SAM.Databases.DbSam.Core.Data.ApplicationUser", "UserModificated")
                         .WithMany()
                         .HasForeignKey("UserModification")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -718,63 +974,63 @@ namespace Core.Data.Migrations
                     b.Navigation("UserModificated");
                 });
 
-            modelBuilder.Entity("SAM.Core.Data.RoleClaim", b =>
+            modelBuilder.Entity("SAM.Databases.DbSam.Core.Data.MigrationsDb.Context.RoleClaim", b =>
                 {
-                    b.HasOne("SAM.Core.Data.Role", null)
+                    b.HasOne("SAM.Databases.DbSam.Core.Data.Role", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("SAM.Core.Data.UserClaim", b =>
+            modelBuilder.Entity("SAM.Databases.DbSam.Core.Data.MigrationsDb.Context.UserClaim", b =>
                 {
-                    b.HasOne("SAM.Core.Data.ApplicationUser", null)
+                    b.HasOne("SAM.Databases.DbSam.Core.Data.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("SAM.Core.Data.UserLogin", b =>
+            modelBuilder.Entity("SAM.Databases.DbSam.Core.Data.MigrationsDb.Context.UserLogin", b =>
                 {
-                    b.HasOne("SAM.Core.Data.ApplicationUser", null)
+                    b.HasOne("SAM.Databases.DbSam.Core.Data.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("SAM.Core.Data.UserRole", b =>
+            modelBuilder.Entity("SAM.Databases.DbSam.Core.Data.MigrationsDb.Context.UserToken", b =>
                 {
-                    b.HasOne("SAM.Core.Data.OfficePlace", "OfficePlace")
+                    b.HasOne("SAM.Databases.DbSam.Core.Data.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("SAM.Databases.DbSam.Core.Data.UserRole", b =>
+                {
+                    b.HasOne("SAM.Databases.DbSam.Core.Data.OfficePlace", "OfficePlace")
                         .WithMany()
                         .HasForeignKey("OfficePlaceId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("SAM.Core.Data.Role", null)
+                    b.HasOne("SAM.Databases.DbSam.Core.Data.Role", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SAM.Core.Data.ApplicationUser", null)
+                    b.HasOne("SAM.Databases.DbSam.Core.Data.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("OfficePlace");
-                });
-
-            modelBuilder.Entity("SAM.Core.Data.UserToken", b =>
-                {
-                    b.HasOne("SAM.Core.Data.ApplicationUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

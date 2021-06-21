@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using SAM.Core.Data;
+using SAM.Databases.DbSam.Core.Data;
 using SAM.Functions.Authorization.MicroService.Models;
 using System;
 using System.Collections.Generic;
@@ -22,9 +22,9 @@ namespace SAM.Functions.Authorization.MicroService.Controllers
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IConfiguration _configuration;
-        SAMContext Context;
+        AuthContext Context;
 
-        public AuthenticateController(UserManager<ApplicationUser> userManager, SAMContext Context, IConfiguration configuration)
+        public AuthenticateController(UserManager<ApplicationUser> userManager, AuthContext Context, IConfiguration configuration)
         {
             this.userManager = userManager;
             _configuration = configuration;

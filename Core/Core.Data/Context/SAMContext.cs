@@ -24,22 +24,6 @@ namespace SAM.Core.Data
 
             base.OnModelCreating(modelBuilder);
         }
-
-        public DbSet<Beneficiary> Beneficiaries { get; set; }
-
-        public DbSet<Session> Sessions { get; set; }
-
-        public DbSet<ControlGift> ControlGifts { get; set; }
-
-        public DbSet<MinistryActiveContribution> MinistryActiveContributions { get; set; }
-
-        public DbSet<MinistryPassiveContribution> MinistryPassiveContributions { get; set; }
-
-        public DbSet<AfpPassiveContribution> AfpPassiveContributions { get; set; }
-
-        public DbSet<OfficePlace> OfficePlaces { get; set; }
-
-
     }
 
     public class UserLogin : IdentityUserLogin<int>

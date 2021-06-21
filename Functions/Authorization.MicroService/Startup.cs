@@ -9,8 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using SAM.Core.Data;
 using SAM.Core.SwaggerConfig;
+using SAM.Databases.DbSam.Core.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,12 +34,12 @@ namespace SAM.Functions.Authorization.MicroService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddDbContext<SAMContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ConnStr")));
+            services.AddDbContext<AuthContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ConnStr")));
 
 
             //For Identity  
             services.AddIdentity<ApplicationUser, Role>()
-                .AddEntityFrameworkStores<SAMContext>()
+                .AddEntityFrameworkStores<AuthContext>()
                 .AddDefaultTokenProviders();
 
             SwaggerConfig.Configure(services, Configuration);

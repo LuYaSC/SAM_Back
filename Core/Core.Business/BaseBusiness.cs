@@ -1,7 +1,6 @@
 ﻿namespace SAM.Core.Business
 {
     using Microsoft.Extensions.Configuration;
-    using SAM.Core.Data;
     using System;
     using System.Linq;
     using System.Security.Principal;

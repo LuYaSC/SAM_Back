@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using SAM.Core.Data;
+using SAM.Databases.DbSam.Core.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;

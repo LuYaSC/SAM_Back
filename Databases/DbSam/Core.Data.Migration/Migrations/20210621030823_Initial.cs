@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Core.Data.Migrations
+namespace SAM.Databases.DbSam.Core.Data.MigrationsDb.Migrations
 {
-    public partial class initial : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -86,7 +86,7 @@ namespace Core.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BeneficiaryType",
+                name: "BeneficiaryTypes",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -96,7 +96,7 @@ namespace Core.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BeneficiaryType", x => x.Id);
+                    table.PrimaryKey("PK_BeneficiaryTypes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -148,6 +148,110 @@ namespace Core.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "MumanalActiveContributions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    cod_base = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    cedula_identidad = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: true),
+                    numbol = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    aporte = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    fecha = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    mes = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ctacte = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MumanalActiveContributions", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MumanalFullActiveBeneficiaries",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    cod_base = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: true),
+                    cedula_identidad = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: true),
+                    primer_apellido = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    segundo_apellido = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    apellido_casada = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    primer_nombre = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    segundo_nombre = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    sector = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    regional = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    distrital = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    obs = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MumanalFullActiveBeneficiaries", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MumanalPartialActiveBeneficiaries",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CARNET_AA = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: true),
+                    COD_BASE = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: true),
+                    NOMBRE1_AA = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    NOMBRE2_AA = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    PATERNO_AA = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    MATERNO_AA = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    SECTOR = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MumanalPartialActiveBeneficiaries", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MumanalPassiveBeneficiaries",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    cod_base = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    concatenado = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    cedula_identidad = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
+                    mat_titular = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    mat_beneficiario = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    primer_apellido = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    segundo_apellido = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    apellido_casada = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    primer_nombre = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    segundo_nombre = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    regional = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    distrital = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    obs = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MumanalPassiveBeneficiaries", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MumanalPassiveContributions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    cod_base = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
+                    cedula_identidad = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
+                    concatenado = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    aporte = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    fecha = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: true),
+                    mes = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MumanalPassiveContributions", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "OfficePlaces",
                 columns: table => new
                 {
@@ -179,6 +283,24 @@ namespace Core.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Sessions", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SeveranceBonusContributions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CodigoBase = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: true),
+                    CedulaIdentidad = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: true),
+                    Descuento = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Fecha = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Mes = table.Column<int>(type: "int", nullable: false),
+                    Sueldo = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SeveranceBonusContributions", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -297,9 +419,9 @@ namespace Core.Data.Migrations
                 {
                     table.PrimaryKey("PK_Beneficiaries", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Beneficiaries_BeneficiaryType_BeneficiaryTypeId",
+                        name: "FK_Beneficiaries_BeneficiaryTypes_BeneficiaryTypeId",
                         column: x => x.BeneficiaryTypeId,
-                        principalTable: "BeneficiaryType",
+                        principalTable: "BeneficiaryTypes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -484,7 +606,25 @@ namespace Core.Data.Migrations
                 name: "MinistryPassiveContributions");
 
             migrationBuilder.DropTable(
+                name: "MumanalActiveContributions");
+
+            migrationBuilder.DropTable(
+                name: "MumanalFullActiveBeneficiaries");
+
+            migrationBuilder.DropTable(
+                name: "MumanalPartialActiveBeneficiaries");
+
+            migrationBuilder.DropTable(
+                name: "MumanalPassiveBeneficiaries");
+
+            migrationBuilder.DropTable(
+                name: "MumanalPassiveContributions");
+
+            migrationBuilder.DropTable(
                 name: "Sessions");
+
+            migrationBuilder.DropTable(
+                name: "SeveranceBonusContributions");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -499,7 +639,7 @@ namespace Core.Data.Migrations
                 name: "OfficePlaces");
 
             migrationBuilder.DropTable(
-                name: "BeneficiaryType");
+                name: "BeneficiaryTypes");
         }
     }
 }

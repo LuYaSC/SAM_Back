@@ -1,15 +1,13 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SAM.Core.AuthConfig;
-using SAM.Core.Data;
 using SAM.Core.SwaggerConfig;
-using SAM.Functions.ControlGifts.MicroService.Business;
+using SAM.Databases.DbSam.Core.Data.Config;
+using SAM.Functions.ControlGift.Business;
 using System.Security.Principal;
 
 namespace SAM.Functions.ControlGifts.MicroService
@@ -28,17 +26,9 @@ namespace SAM.Functions.ControlGifts.MicroService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-
-            services.AddDbContext<SAMContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
-            services.AddIdentity<ApplicationUser, Role>()
-                .AddEntityFrameworkStores<SAMContext>()
-                .AddDefaultTokenProviders();
-
             services.AddTransient<IPrincipal>(provider => provider.GetService<IHttpContextAccessor>().HttpContext.User);
-
             services.AddTransient<IControlGiftsBusiness, ControlGiftsBusiness>();
-
+            DataConfig<ControlGiftsContext>.Configure(services, Configuration);
             AuthConfig.Configure(services, Configuration);
             SwaggerConfig.Configure(services, Configuration);
         }

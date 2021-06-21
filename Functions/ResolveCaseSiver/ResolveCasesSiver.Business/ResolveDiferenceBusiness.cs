@@ -1,4 +1,4 @@
-﻿using SAM.Core.Data;
+﻿using SAM.Databases.DbSam.Core.Data;
 using SAM.Functions.ResolveCasesSiver.Business.Models;
 using System;
 using System.Collections.Generic;
@@ -9,9 +9,9 @@ namespace SAM.Functions.ResolveCasesSiver.Business
 {
     public class ResolveDiferenceBusiness : IResolveDiferenceBusiness
     {
-        SAMContext Context;
+        ResolveCasesSiverContext Context;
 
-        public ResolveDiferenceBusiness(SAMContext Context)
+        public ResolveDiferenceBusiness(ResolveCasesSiverContext Context)
         {
             this.Context = Context;
         }
@@ -104,7 +104,7 @@ namespace SAM.Functions.ResolveCasesSiver.Business
 
             var c = listSiver.GroupBy(d => d.Fecha)
                     .Select(
-                    g => new BonoCesantiaDato
+                    g => new SeveranceBonusContribution
                     {
                         Id = g.First().Id,
                         CodigoBase = g.First().CodigoBase,
@@ -178,7 +178,6 @@ namespace SAM.Functions.ResolveCasesSiver.Business
 
         public List<ResolveDiferenceMassiveResult> GetCaseDataMassive(ResolveDiferenceDto dto)
         {
-            var date = new DateTime();
             List<ResolveDiferenceMassiveResult> result = new List<ResolveDiferenceMassiveResult>();
             foreach (var search in dto.Documents)
             {

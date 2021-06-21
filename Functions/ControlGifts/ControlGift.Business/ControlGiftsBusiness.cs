@@ -1,26 +1,24 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using SAM.Core.Data;
+using SAM.Databases.DbSam.Core.Data;
 using SAM.Functions.ControlGifts.MicroService.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Security.Principal;
-using System.Threading.Tasks;
 
-namespace SAM.Functions.ControlGifts.MicroService.Business
+namespace SAM.Functions.ControlGift.Business
 {
     public class ControlGiftsBusiness : IControlGiftsBusiness
     {
         IConfiguration configuration;
-        SAMContext Context;
+        ControlGiftsContext Context;
         IPrincipal userInfo;
         int totalAports = 0;
         int userId = 0;
 
 
-        public ControlGiftsBusiness(IConfiguration configuration, SAMContext Context, IPrincipal userInfo)
+        public ControlGiftsBusiness(IConfiguration configuration, ControlGiftsContext Context, IPrincipal userInfo)
         {
             this.configuration = configuration;
             this.Context = Context;

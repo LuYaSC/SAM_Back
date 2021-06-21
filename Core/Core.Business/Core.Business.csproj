@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Core.Data\Core.Data.csproj" />
+    <ProjectReference Include="..\..\Databases\DbSam\Core.Data\Core.Data.csproj" />
   </ItemGroup>
 
 </Project>

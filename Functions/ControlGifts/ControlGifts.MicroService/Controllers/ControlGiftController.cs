@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using SAM.Core.Data;
-using SAM.Functions.ControlGifts.MicroService.Business;
+using SAM.Databases.DbSam.Core.Data;
+using SAM.Functions.ControlGift.Business;
 using SAM.Functions.ControlGifts.MicroService.Models;
 using System.Collections.Generic;
 
