@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SAM.Functions.ResolveCasesSiver.Business;
 using SAM.Functions.ResolveCasesSiver.Business.Models;
@@ -11,6 +12,7 @@ namespace ResolveCaseContribution.MicroService.Controllers
 {
     [ApiController]
     [Route("api/[controller]/[action]")]
+    [Authorize]
 
     public class ResolveCaseSiverController : ControllerBase
     {
