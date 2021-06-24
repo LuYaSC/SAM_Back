@@ -13,7 +13,7 @@ namespace ResolveCaseContribution.MicroService.Controllers
 {
     [ApiController]
     [Route("api/[controller]/[action]")]
-    [Authorize]
+    //[Authorize]
 
     public class ResolveCaseSiverController : ControllerBase
     {
