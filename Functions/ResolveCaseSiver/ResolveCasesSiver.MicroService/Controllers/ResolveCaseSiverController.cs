@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using SAM.Core.Business;
 using SAM.Functions.ResolveCasesSiver.Business;
 using SAM.Functions.ResolveCasesSiver.Business.Models;
 using System;
@@ -26,7 +27,7 @@ namespace ResolveCaseContribution.MicroService.Controllers
         }
 
         [HttpPost]
-        public ResolveDiferenceResult GetCaseData([FromBody] ResolveDiferenceDto dto) => business.GetCaseData(dto);
+        public Result<ResolveDiferenceResult> GetCaseData([FromBody] ResolveDiferenceDto dto) => business.GetCaseData(dto);
 
         [HttpPost]
         public ResolveDiferenceResult GetCaseDataBC([FromBody] ResolveDiferenceDto dto) => business.GetCaseDataBC(dto);

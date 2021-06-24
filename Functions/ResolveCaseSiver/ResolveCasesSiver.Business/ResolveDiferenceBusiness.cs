@@ -1,22 +1,22 @@
-﻿using SAM.Databases.DbSam.Core.Data;
+﻿using Microsoft.Extensions.Configuration;
+using SAM.Core.Business;
+using SAM.Databases.DbSam.Core.Data;
 using SAM.Functions.ResolveCasesSiver.Business.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Threading.Tasks;
 
 namespace SAM.Functions.ResolveCasesSiver.Business
 {
-    public class ResolveDiferenceBusiness : IResolveDiferenceBusiness
+    public class ResolveDiferenceBusiness : BaseBusiness<Beneficiary, ResolveCasesSiverContext> , IResolveDiferenceBusiness
     {
-        ResolveCasesSiverContext Context;
-
-        public ResolveDiferenceBusiness(ResolveCasesSiverContext Context)
+        public ResolveDiferenceBusiness(ResolveCasesSiverContext context, IPrincipal userInfo, IConfiguration configuration = null) : base(context, userInfo, configuration)
         {
-            this.Context = Context;
         }
 
-        public ResolveDiferenceResult GetCaseData(ResolveDiferenceDto dto)
+        public Result<ResolveDiferenceResult> GetCaseData(ResolveDiferenceDto dto)
         {
             ResolveDiferenceResult result = new ResolveDiferenceResult();
             var listSiver = Context.MumanalActiveContributions.Where(x => x.cedula_identidad == dto.DocumentNumber).ToList();
@@ -74,7 +74,7 @@ namespace SAM.Functions.ResolveCasesSiver.Business
             }
             result.Details = result.Details.OrderBy(x => x.Id).ToList();
             result.MissingData = count;
-            return result;
+            return Result<ResolveDiferenceResult>.SetOk(result);
         }
 
         public ResolveDiferenceResult GetCaseDataBC(ResolveDiferenceDto dto)

@@ -1,4 +1,5 @@
-﻿using SAM.Functions.ResolveCasesSiver.Business.Models;
+﻿using SAM.Core.Business;
+using SAM.Functions.ResolveCasesSiver.Business.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace SAM.Functions.ResolveCasesSiver.Business
 {
     public interface IResolveDiferenceBusiness
     {
-        ResolveDiferenceResult GetCaseData(ResolveDiferenceDto dto);
+        Result<ResolveDiferenceResult> GetCaseData(ResolveDiferenceDto dto);
 
         ResolveDiferenceResult GetCaseDataBC(ResolveDiferenceDto dto);
 
