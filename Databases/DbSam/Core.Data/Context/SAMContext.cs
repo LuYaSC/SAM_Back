@@ -36,7 +36,7 @@ namespace SAM.Databases.DbSam.Core.Data.Context
             modelBuilder.HasDefaultSchema("ms");
             //modelBuilder.Entity<>().HasQueryFilter(p => !p.IsDeleted);
             //modelBuilder.Filter("IsDeleted", (ILogicalDelete d) => d.IsDeleted, false);
-
+            /**/
             base.OnModelCreating(modelBuilder);
         }
         //public void DisableFilter<CONTEXT>(CONTEXT context, string nameFilter)
