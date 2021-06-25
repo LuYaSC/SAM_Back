@@ -247,7 +247,7 @@ namespace SAM.Functions.ResolveCasesSiver.Business
         {
             GetPassiveAportsResponse result = new GetPassiveAportsResponse();
             var beneficiaries = Context.MumanalPassiveBeneficiaries.Where(x => x.cedula_identidad == dto.DocumentNumber).ToList();
-            var lastMat = beneficiaries[1];
+            var lastMat = beneficiaries.Last();
             var firtMat = beneficiaries.First();
             List<MinistryPassiveContribution> MinisteryData = new List<MinistryPassiveContribution>();
             switch (dto.TypeSearch)
