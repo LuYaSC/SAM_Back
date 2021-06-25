@@ -47,7 +47,7 @@ namespace SAM.Functions.ResolveCasesSiver.Business
             {
                 var dateSiver = data.FECHAAPORTES_AA.ToString("yyyy-MM-dd");
                 var codBase = listSiver.First().cod_base;
-                var ctacte = listSiver.Where(x => !string.IsNullOrEmpty(x.ctacte)).First().ctacte;
+                var ctacte = listSiver.Where(x => !string.IsNullOrEmpty(x.ctacte)).FirstOrDefault()?.ctacte;
                 if (listSiver.Where(x => x.fecha == dateSiver).FirstOrDefault() == null)
                 {
                     count++;
@@ -247,7 +247,7 @@ namespace SAM.Functions.ResolveCasesSiver.Business
         {
             GetPassiveAportsResponse result = new GetPassiveAportsResponse();
             var beneficiaries = Context.MumanalPassiveBeneficiaries.Where(x => x.cedula_identidad == dto.DocumentNumber).ToList();
-            var lastMat = beneficiaries.Last();
+            var lastMat = beneficiaries[1];
             var firtMat = beneficiaries.First();
             List<MinistryPassiveContribution> MinisteryData = new List<MinistryPassiveContribution>();
             switch (dto.TypeSearch)
