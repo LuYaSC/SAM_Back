@@ -13,8 +13,8 @@ namespace SAM.Functions.ResolveCasesSiver.Business
     {
         public ResolveCasesSiverContext(DbContextOptions options) : base(options)
         {
-
         }
+
         public DbSet<MinistryActiveContribution> MinistryActiveContributions { get; set; }
 
         public DbSet<MumanalActiveContribution> MumanalActiveContributions { get; set; }

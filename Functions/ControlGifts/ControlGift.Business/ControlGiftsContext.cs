@@ -13,7 +13,6 @@ namespace SAM.Functions.ControlGift.Business
     {
         public ControlGiftsContext(DbContextOptions options) : base(options)
         {
-
         }
         public DbSet<Beneficiary> Beneficiaries { get; set; }
 

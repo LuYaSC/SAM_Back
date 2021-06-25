@@ -9,8 +9,8 @@ namespace SAM.Functions.ReturnsASR.Business
     {
         public ReturnsASRContext(DbContextOptions options) : base(options)
         {
-
         }
+
         public DbSet<AsrReturn> AsrReturns { get; set; }
 
         public DbSet<Beneficiary> Beneficiaries { get; set; }
