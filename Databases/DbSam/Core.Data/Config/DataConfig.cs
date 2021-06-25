@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SAM.Core.DataDb;
 using SAM.Databases.DbSam.Core.Data.Context;
 
 namespace SAM.Databases.DbSam.Core.Data.Config

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SAM.Databases.DbSam.Core.Data.MigrationsDb.Context;
 
 namespace SAM.Databases.DbSam.Core.Data.MigrationsDb.Migrations
 {
     [DbContext(typeof(SAMContext))]
-    partial class SAMContextModelSnapshot : ModelSnapshot
+    [Migration("20210625041338_CreateTableAsrReturns")]
+    partial class CreateTableAsrReturns
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

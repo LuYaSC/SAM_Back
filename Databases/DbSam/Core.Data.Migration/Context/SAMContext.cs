@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using SAM.Core.DataDb;
 using System.Linq;
 
 namespace SAM.Databases.DbSam.Core.Data.MigrationsDb.Context
@@ -61,6 +62,9 @@ namespace SAM.Databases.DbSam.Core.Data.MigrationsDb.Context
 
         //tabla de aportes Bono de cesantia sistema mutual
         public DbSet<SeveranceBonusContribution> SeveranceBonusContributions { get; set; }
+
+        //tabla devoluciones ASR
+        public DbSet<AsrReturn> AsrReturns { get; set; }
 
     }
 

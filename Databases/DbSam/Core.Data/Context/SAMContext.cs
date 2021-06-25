@@ -1,13 +1,12 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using SAM.Core.DataDb;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Common;
 using System.Linq;
 using System.Security.Principal;
-using System.Threading.Tasks;
 
 namespace SAM.Databases.DbSam.Core.Data.Context
 {
@@ -33,7 +32,7 @@ namespace SAM.Databases.DbSam.Core.Data.Context
             var cascadeFKs = modelBuilder.Model.GetEntityTypes().SelectMany(t => t.GetForeignKeys()).Where(fk => !fk.IsOwnership && fk.DeleteBehavior == DeleteBehavior.Cascade);
             foreach (var fk in cascadeFKs)
                 fk.DeleteBehavior = DeleteBehavior.Restrict;
-            modelBuilder.HasDefaultSchema("ms");
+            //modelBuilder.HasDefaultSchema("ms");
             //modelBuilder.Entity<>().HasQueryFilter(p => !p.IsDeleted);
             //modelBuilder.Filter("IsDeleted", (ILogicalDelete d) => d.IsDeleted, false);
             /**/

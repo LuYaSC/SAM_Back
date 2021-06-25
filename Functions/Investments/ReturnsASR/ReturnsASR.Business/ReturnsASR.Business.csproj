@@ -2,6 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>SAM.Functions.ReturnsASR.Business</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Databases\DbSam\Core.Data\Core.Data.csproj" />
+  </ItemGroup>
 
 </Project>

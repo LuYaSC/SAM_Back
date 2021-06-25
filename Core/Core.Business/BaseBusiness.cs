@@ -1,7 +1,7 @@
 ﻿namespace SAM.Core.Business
 {
     using Microsoft.Extensions.Configuration;
-    using SAM.Databases.DbSam.Core.Data;
+    using SAM.Core.DataDb;
     using SAM.Databases.DbSam.Core.Data.Context;
     using System;
     using System.Linq;

@@ -8,6 +8,9 @@ WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
+#timezone env with default
+ENV TZ America/La_Paz
+
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
 COPY ["Functions/Investments/ReturnsASR/ReturnsASR.MicroService/ReturnsASR.MicroService.csproj", "Functions/Investments/ReturnsASR/ReturnsASR.MicroService/"]

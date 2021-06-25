@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SAM.Core.Data
+namespace SAM.Core.DataDb
 {
     public class ApplicationUser : IdentityUser<int>
     {
@@ -19,6 +19,16 @@ namespace SAM.Core.Data
 
         public DateTime? DateModification { get; set; }
 
+        [MaxLength(1)]
         public string State { get; set; }
+
+        [MaxLength(100)]
+        public string Name { get; set; }
+
+        [MaxLength(100)]
+        public string FirstLastName { get; set; }
+
+        [MaxLength(100)]
+        public string SecondLastName { get; set; }
     }
 }

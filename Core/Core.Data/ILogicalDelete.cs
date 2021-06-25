@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SAM.Core.Data
+namespace SAM.Core.DataDb
 {
     public interface ILogicalDelete
     {
