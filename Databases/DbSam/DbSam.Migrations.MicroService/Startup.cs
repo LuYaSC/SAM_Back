@@ -5,12 +5,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SAM.Core.AuthConfig;
+using SAM.Core.DataDb;
 using SAM.Core.SwaggerConfig;
 using SAM.Databases.DbSam.Core.Data;
 using SAM.Databases.DbSam.Core.Data.MigrationsDb.Context;
 
 
-namespace DbSam.Migrations.MicroService
+namespace SAM.Databases.DbSam.Migrations.MicroService
 {
     public class Startup
     {

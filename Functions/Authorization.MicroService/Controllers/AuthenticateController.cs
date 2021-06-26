@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using SAM.Core.DataDb;
 using SAM.Databases.DbSam.Core.Data;
 using SAM.Functions.Authorization.MicroService.Models;
 using System;
