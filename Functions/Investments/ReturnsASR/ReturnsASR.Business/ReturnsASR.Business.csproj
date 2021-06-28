@@ -1,11 +1,16 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <RootNamespace>SAM.Functions.ReturnsASR.Business</RootNamespace>
+    <RootNamespace>SAM.Functions.Investments.ReturnsASR.Business</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Core\Core.Business\Core.Business.csproj" />
     <ProjectReference Include="..\..\..\..\Databases\DbSam\Core.Data\Core.Data.csproj" />
   </ItemGroup>
 

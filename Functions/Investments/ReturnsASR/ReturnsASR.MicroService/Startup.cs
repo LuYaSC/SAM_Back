@@ -7,7 +7,7 @@ using Microsoft.Extensions.Hosting;
 using SAM.Core.AuthConfig;
 using SAM.Core.SwaggerConfig;
 using SAM.Databases.DbSam.Core.Data.Config;
-using SAM.Functions.ReturnsASR.Business;
+using SAM.Functions.Investments.ReturnsASR.Business;
 using System;
 using System.Collections.Generic;
 using System.Linq;

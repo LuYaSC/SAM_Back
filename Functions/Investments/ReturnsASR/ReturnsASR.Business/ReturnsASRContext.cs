@@ -3,7 +3,7 @@ using SAM.Databases.DbSam.Core.Data;
 using SAM.Databases.DbSam.Core.Data.Context;
 using System;
 
-namespace SAM.Functions.ReturnsASR.Business
+namespace SAM.Functions.Investments.ReturnsASR.Business
 {
     public class ReturnsASRContext : SAMContext
     {

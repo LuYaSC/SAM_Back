@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Security.Claims;
 using System.Security.Principal;
 
 namespace SAM.Databases.DbSam.Core.Data.Context
@@ -119,7 +120,7 @@ namespace SAM.Databases.DbSam.Core.Data.Context
         }
 
         public void RemoveData<T>(List<T> entities)
-          where T : class //, IBase<int>
+          where T : class , IBase<int>
         {
             foreach (var entity in entities)
             {
@@ -171,6 +172,7 @@ namespace SAM.Databases.DbSam.Core.Data.Context
             where TEntity : class, IBase<TypeKey>
             where TypeKey : IEquatable<TypeKey>, IConvertible
         {
+            var claimsIdentity = (ClaimsIdentity)this.userInfo.Identity;
             if (entity == null)
             {
                 return;
@@ -186,14 +188,14 @@ namespace SAM.Databases.DbSam.Core.Data.Context
                 {
                     (entity as IDateModification).DateModification = DateTime.Now;
                 }
-                //if (entity is IUserCreation<TypeKey>)
-                //{
-                //    (entity as IUserCreation<TypeKey>).UserCreation = this.userInfo.Identity.GetUserId<TypeKey>();
-                //}
-                //if (entity is IUserModification<TypeKey>)
-                //{
-                //    (entity as IUserModification<TypeKey>).UserModification = this.userInfo.Identity.GetUserId<TypeKey>();
-                //}
+                if (entity is IUserCreation<int>)
+                {
+                    (entity as IUserCreation<int>).UserCreation = int.Parse(claimsIdentity.Claims.Where(x => x.Type == "identifier").FirstOrDefault().Value);
+                }
+                if (entity is IUserModification<int>)
+                {
+                    (entity as IUserModification<int>).UserModification = int.Parse(claimsIdentity.Claims.Where(x => x.Type == "identifier").FirstOrDefault().Value);
+                }
                 //if (entity is IUserCreation<string>)
                 //{
                 //    (entity as IUserCreation<string>).UserCreation = this.userInfo.Identity.GetUserId<string>();
