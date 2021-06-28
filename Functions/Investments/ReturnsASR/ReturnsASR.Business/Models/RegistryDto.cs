@@ -6,12 +6,16 @@ using System.Threading.Tasks;
 
 namespace SAM.Functions.Investments.ReturnsASR.Business.Models
 {
-    public class ModifyRegistryASRDto
+    public class RegistryDto
     {
-        public int RegistryId { get; set; }
+        public int BeneficiaryId { get; set; }
 
         public decimal Amount { get; set; }
 
+        public int AsrNumber { get; set; }
 
+        public int ReportNumber { get; set; }
+
+        public string DisbursementVoucher { get; set; }
     }
 }

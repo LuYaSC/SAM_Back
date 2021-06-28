@@ -172,5 +172,13 @@ namespace SAM.Functions.ControlGift.Business
 
         public List<OfficePlace> GetOffices() => Context.OfficePlaces.ToList();
 
+        public ReportControlGiftResult GetReports()
+        {
+            var dates = Context.ControlGifts.Include(x => x.Beneficiary).Include(x => x.UserCreated).Include(x => x.OfficePlace).ToList();
+            
+            if()
+
+        }
+
     }
 }

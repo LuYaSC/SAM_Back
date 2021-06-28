@@ -13,7 +13,7 @@ namespace SAM.Functions.ReturnsASR.MicroService.Controllers
 {
     [ApiController]
     [Route("api/[controller]/[action]")]
-    //[Authorize]
+    [Authorize]
 
     public class ReturnsASRController : ControllerBase
     {
@@ -33,12 +33,12 @@ namespace SAM.Functions.ReturnsASR.MicroService.Controllers
         public Result<GetBeneficiaryResult> GetBeneficiary([FromBody] GetBeneficiaryDto dto) => business.GetBeneficiary(dto);
 
         [HttpPost]
-        public Result<string> RegistryReturnASR([FromBody] RegistryReturnASRDto dto) => business.RegistryReturnASR(dto);
+        public Result<string> RegistryReturnASR([FromBody] RegistryDto dto) => business.RegistryReturnASR(dto);
 
         [HttpPost]
-        public Result<string> ModifyRegistryASR([FromBody] ModifyRegistryASRDto dto) => business.ModifyRegistryASR(dto);
+        public Result<string> ModifyRegistryASR([FromBody] ModifyDto dto) => business.ModifyRegistryASR(dto);
 
         [HttpPost]
-        public Result<string> Delete([FromBody] ModifyRegistryASRDto dto) => business.Delete(dto);
+        public Result<string> Delete([FromBody] ModifyDto dto) => business.Delete(dto);
     }
 }

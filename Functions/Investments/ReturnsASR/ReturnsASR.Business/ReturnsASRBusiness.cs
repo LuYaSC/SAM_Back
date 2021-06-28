@@ -21,7 +21,7 @@ namespace SAM.Functions.Investments.ReturnsASR.Business
         {
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<RegistryReturnASRDto, AsrReturn>();
+                cfg.CreateMap<RegistryDto, AsrReturn>();
                 cfg.CreateMap<Beneficiary, GetBeneficiaryResult>();
                 cfg.CreateMap<AsrReturn, GetReturnsASRResult>();
             });
@@ -52,7 +52,7 @@ namespace SAM.Functions.Investments.ReturnsASR.Business
                 : Result<GetBeneficiaryResult>.SetOk(mapper.Map<GetBeneficiaryResult>(beneficiary));
         }
 
-        public Result<string> RegistryReturnASR(RegistryReturnASRDto dto)
+        public Result<string> RegistryReturnASR(RegistryDto dto)
         {
             try
             {
@@ -65,7 +65,7 @@ namespace SAM.Functions.Investments.ReturnsASR.Business
             }
         }
 
-        public Result<string> ModifyRegistryASR(ModifyRegistryASRDto dto)
+        public Result<string> ModifyRegistryASR(ModifyDto dto)
         {
             var registry = Context.AsrReturns.Where(x => x.Id == dto.RegistryId).FirstOrDefault();
             if (registry == null)
@@ -77,12 +77,12 @@ namespace SAM.Functions.Investments.ReturnsASR.Business
             return Result<string>.SetOk("La operacion se realizo con exito");
         }
 
-        public Result<string> Delete(ModifyRegistryASRDto dto)
+        public Result<string> Delete(ModifyDto dto)
         {
             try
             {
                 Remove(dto.RegistryId);
-                return Result<string>.SetError("Registro eliminado con exito");
+                return Result<string>.SetOk("Registro eliminado con exito");
             }
             catch (Exception ex)
             {

@@ -11,10 +11,10 @@ namespace SAM.Functions.Investments.ReturnsASR.Business
 
         Result<GetBeneficiaryResult> GetBeneficiary(GetBeneficiaryDto dto);
 
-        Result<string> RegistryReturnASR(RegistryReturnASRDto dto);
+        Result<string> RegistryReturnASR(RegistryDto dto);
 
-        Result<string> ModifyRegistryASR(ModifyRegistryASRDto dto);
+        Result<string> ModifyRegistryASR(ModifyDto dto);
 
-        Result<string> Delete(ModifyRegistryASRDto dto);
+        Result<string> Delete(ModifyDto dto);
     }
 }

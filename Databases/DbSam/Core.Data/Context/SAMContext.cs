@@ -205,10 +205,26 @@ namespace SAM.Databases.DbSam.Core.Data.Context
                 //    (entity as IUserModification<string>).UserModification = this.userInfo.Identity.GetUserId<string>();
                 //}
             }
-            //else
-            //{
-            //    UpdateEntity<TEntity, TypeKey>(entity);
-            //}
+            else
+            {
+                UpdateEntity<TEntity, TypeKey>(entity);
+            }
+        }
+
+        private void UpdateEntity<TEntity, TypeKey>(TEntity entity)
+           where TEntity : class, IBase<TypeKey>
+           where TypeKey : IEquatable<TypeKey>, IConvertible
+        {
+            var claimsIdentity = (ClaimsIdentity)this.userInfo.Identity;
+
+            if (entity is IDateModification)
+            {
+                (entity as IDateModification).DateModification = DateTime.Now;
+            }
+            if (entity is IUserModification<int>)
+            {
+                (entity as IUserModification<int>).UserModification = int.Parse(claimsIdentity.Claims.Where(x => x.Type == "identifier").FirstOrDefault().Value);
+            }
         }
     }
 }
