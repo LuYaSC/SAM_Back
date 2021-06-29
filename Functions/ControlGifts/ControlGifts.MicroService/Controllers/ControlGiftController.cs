@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SAM.Databases.DbSam.Core.Data;
 using SAM.Functions.ControlGift.Business;
-using SAM.Functions.ControlGifts.MicroService.Models;
+using SAM.Functions.ControlGifts.Business.Models;
 using System.Collections.Generic;
 
 namespace SAM.Functions.ControlGifts.MicroService.Controllers
@@ -28,5 +28,8 @@ namespace SAM.Functions.ControlGifts.MicroService.Controllers
 
         [HttpPost]
         public List<OfficePlace> GetOffices() => business.GetOffices();
+
+        [HttpPost]
+        public ReportControlGiftResult GetReports() => business.GetReports();
     }
 }

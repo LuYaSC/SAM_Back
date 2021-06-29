@@ -1,7 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using SAM.Databases.DbSam.Core.Data;
-using SAM.Functions.ControlGifts.MicroService.Models;
+using SAM.Functions.ControlGifts.Business.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,10 @@ namespace SAM.Functions.ControlGift.Business
         IPrincipal userInfo;
         int totalAports = 0;
         int userId = 0;
+        IMapper mapper;
+        int totalGifts;
+        int totalBackPack;
+        int totalSchedule;
 
 
         public ControlGiftsBusiness(IConfiguration configuration, ControlGiftsContext Context, IPrincipal userInfo)
@@ -26,6 +31,19 @@ namespace SAM.Functions.ControlGift.Business
             this.userInfo = userInfo;
             var claimsIdentity = (ClaimsIdentity)this.userInfo.Identity;
             userId = int.Parse(claimsIdentity.Claims.Where(x => x.Type == "identifier").FirstOrDefault().Value);
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Databases.DbSam.Core.Data.ControlGift, OfficePerGifts>()
+                    .ForMember(d => d.Description, o => o.MapFrom(s => s.OfficePlace.Description))
+                    .ForMember(d => d.DescriptionType, o => o.MapFrom(s => s.OfficePlace.DescriptionType));
+            });
+            //var claimsIdentity = (ClaimsIdentity) userInfo.Identity;
+            //userId = int.Parse(claimsIdentity.Claims.Where(x => x.Type == "identifier").FirstOrDefault().Value);
+            //if (UserInfo.Identity.Name != null)
+            //{
+            //    companyId = UserInfo.Identity.GetCompanyId();
+            //}
+            mapper = new Mapper(config);
         }
 
         public GetControlGiftResult GetDatesBeneficiary(GetControlGiftDto dto)
@@ -174,10 +192,55 @@ namespace SAM.Functions.ControlGift.Business
 
         public ReportControlGiftResult GetReports()
         {
+            ReportControlGiftResult result = new ReportControlGiftResult();
             var dates = Context.ControlGifts.Include(x => x.Beneficiary).Include(x => x.UserCreated).Include(x => x.OfficePlace).ToList();
-            
-            if()
+            var offices = Context.OfficePlaces.Where(x => !x.IsDeleted).ToList();
+            foreach (var office in offices)
+            {
+                var list = dates.Where(x => x.OfficePlaceId == office.Id).ToList();
+                var listGroup = list.GroupBy(d => d.BeneficiaryId)
+                   .Select(
+                   g => new Databases.DbSam.Core.Data.ControlGift
+                   {
+                       Id = g.First().Id,
+                       HaveBackpack = g.First().HaveBackpack,
+                       HaveSchedule = g.First().HaveSchedule,
+                       DateCreation = g.First().DateCreation,
+                       DateModification = g.First().DateModification,
+                       BeneficiaryId = g.First().BeneficiaryId,
+                       OfficePlaceId = g.First().OfficePlaceId,
+                       UserCreation = g.First().UserCreation,
+                       UserModification = g.First().UserModification,
+                       Observations = g.First().Observations,
+                       IsDeleted = g.First().IsDeleted,
+                   });
+                totalGifts = listGroup.Count();
+                totalBackPack = listGroup.Count(x => x.HaveBackpack);
+                totalSchedule = listGroup.Count(x => x.HaveSchedule);
+                result.DatesPerOffice = mapper.Map<List<OfficePerGifts>>(listGroup);
+            }
 
+            var listGroupGen = dates.GroupBy(d => d.BeneficiaryId)
+                  .Select(
+                  g => new Databases.DbSam.Core.Data.ControlGift
+                  {
+                      Id = g.First().Id,
+                      HaveBackpack = g.First().HaveBackpack,
+                      HaveSchedule = g.First().HaveSchedule,
+                      DateCreation = g.First().DateCreation,
+                      DateModification = g.First().DateModification,
+                      BeneficiaryId = g.First().BeneficiaryId,
+                      OfficePlaceId = g.First().OfficePlaceId,
+                      UserCreation = g.First().UserCreation,
+                      UserModification = g.First().UserModification,
+                      Observations = g.First().Observations,
+                      IsDeleted = g.First().IsDeleted,
+                  });
+
+            result.Total = listGroupGen.Count();
+            result.TotalBackPack = listGroupGen.Count(x => x.HaveBackpack);
+            result.TotalSchedule = listGroupGen.Count(x => x.HaveSchedule);
+            return result;
         }
 
     }

@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace SAM.Functions.ControlGifts.Business.Models
 {
-    public class AssingGiftResult
+    public class ReportControlGiftDto
     {
-        public bool IsOk { get; set; }
+        public int Total { get; set; }
 
-        public string Message { get; set; }
+       
     }
+
+   
 }
