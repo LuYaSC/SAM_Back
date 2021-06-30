@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SAM.Core.Business;
 using SAM.Databases.DbSam.Core.Data;
 using SAM.Functions.ControlGift.Business;
-using SAM.Functions.ControlGifts.Business.Models;
+using SAM.Functions.ControlGift.Business.Models;
 using System.Collections.Generic;
 
 namespace SAM.Functions.ControlGifts.MicroService.Controllers
@@ -14,10 +15,12 @@ namespace SAM.Functions.ControlGifts.MicroService.Controllers
     public class ControlGiftController : ControllerBase
     {
         IControlGiftsBusiness business;
+        IReportsControlGiftBusiness reports;
 
-        public ControlGiftController(IControlGiftsBusiness business)
+        public ControlGiftController(IControlGiftsBusiness business, IReportsControlGiftBusiness reports)
         {
             this.business = business;
+            this.reports = reports;
         }
 
         [HttpPost]
@@ -30,6 +33,12 @@ namespace SAM.Functions.ControlGifts.MicroService.Controllers
         public List<OfficePlace> GetOffices() => business.GetOffices();
 
         [HttpPost]
-        public ReportControlGiftResult GetReports() => business.GetReports();
+        public Result<ReportControlGiftResult> GetReports() => reports.GetReports();
+
+        [HttpPost]
+        public Result<GetGiftsDeliveredResult> GetMyGiftsDelivered([FromBody] GetGiftsDeliveredDto dto) => reports.GetMyGiftsDelivered(dto);
+
+        [HttpPost]
+        public Result<GetGiftsDeliveredResult> GetAllGiftsDelivered([FromBody] GetGiftsDeliveredDto dto) => reports.GetAllGiftsDelivered(dto);
     }
 }

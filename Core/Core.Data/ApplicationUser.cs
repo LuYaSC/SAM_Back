@@ -22,13 +22,13 @@ namespace SAM.Core.DataDb
         [MaxLength(1)]
         public string State { get; set; }
 
-        [MaxLength(100)]
-        public string Name { get; set; }
+        //[MaxLength(100)]
+        //public string Name { get; set; }
 
-        [MaxLength(100)]
-        public string FirstLastName { get; set; }
+        //[MaxLength(100)]
+        //public string FirstLastName { get; set; }
 
-        [MaxLength(100)]
-        public string SecondLastName { get; set; }
+        //[MaxLength(100)]
+        //public string SecondLastName { get; set; }
     }
 }

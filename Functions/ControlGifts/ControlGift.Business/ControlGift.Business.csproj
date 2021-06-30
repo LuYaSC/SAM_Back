@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>SAM.Functions.ControlGift.Business</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -9,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Core\Core.Business\Core.Business.csproj" />
     <ProjectReference Include="..\..\..\Databases\DbSam\Core.Data\Core.Data.csproj" />
   </ItemGroup>
 

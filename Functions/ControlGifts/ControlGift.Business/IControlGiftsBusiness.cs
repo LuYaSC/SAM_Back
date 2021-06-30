@@ -1,5 +1,5 @@
 ﻿using SAM.Databases.DbSam.Core.Data;
-using SAM.Functions.ControlGifts.Business.Models;
+using SAM.Functions.ControlGift.Business.Models;
 using System.Collections.Generic;
 
 namespace SAM.Functions.ControlGift.Business
@@ -11,7 +11,5 @@ namespace SAM.Functions.ControlGift.Business
         AssingGiftResult AssingGift(AssingGiftDto dto);
 
         List<OfficePlace> GetOffices();
-
-        ReportControlGiftResult GetReports();
     }
 }

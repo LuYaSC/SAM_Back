@@ -4,10 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SAM.Functions.ControlGifts.Business.Models
+namespace SAM.Functions.ControlGift.Business.Models
 {
     public class ReportControlGiftResult
     {
+        public ReportControlGiftResult()
+        {
+            DatesPerOffice = new List<OfficePerGifts>();
+        }
+
         public int Total { get; set; }
 
         public int TotalBackPack { get; set; }
@@ -22,6 +27,8 @@ namespace SAM.Functions.ControlGifts.Business.Models
         public string DescriptionType { get; set; }
 
         public string Description { get; set; }
+
+        public int TotalPerRegional { get; set; }
 
         public int TotalBackPack { get; set; }
 
