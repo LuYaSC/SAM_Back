@@ -4,6 +4,11 @@ namespace SAM.Functions.ControlGift.Business.Models
 {
     public class ReportControlGiftResult
     {
+        public ReportControlGiftResult()
+        {
+            DatesPerOffice = new List<OfficePerGifts>();
+        }
+
         public int Total { get; set; }
 
         public int TotalBackPack { get; set; }

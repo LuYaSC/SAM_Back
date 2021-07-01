@@ -8,14 +8,14 @@ namespace SAM.Functions.ControlGift.Business.Models
 {
     public class OfficePerGifts
     {
-        public string DescriptionType { get; set; }
+        public string DescriptionType { get; set; } = string.Empty;
 
-        public string Description { get; set; }
+        public string Description { get; set; } = string.Empty;
 
-        public int TotalPerRegional { get; set; }
+        public int TotalPerRegional { get; set; } = 0;
 
-        public int TotalBackPack { get; set; }
+        public int TotalBackPack { get; set; } = 0;
 
-        public int TotalSchedule { get; set; }
+        public int TotalSchedule { get; set; } = 0;
     }
 }
