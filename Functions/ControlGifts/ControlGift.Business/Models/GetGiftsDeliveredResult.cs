@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace SAM.Functions.ControlGift.Business.Models
 {
@@ -8,20 +7,5 @@ namespace SAM.Functions.ControlGift.Business.Models
         public int Total { get; set; }
 
         public List<ListDelivered> Delivered { get; set; }
-    }
-
-    public class ListDelivered
-    {
-        public string Beneficiary { get; set; }
-
-        public string HaveBackPack { get; set; }
-
-        public string HaveSchedule { get; set; }
-
-        public string Office { get; set; }
-
-        public string Observations { get; set; }
-
-        public DateTime DateCreation { get; set; }
     }
 }

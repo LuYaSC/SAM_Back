@@ -22,14 +22,5 @@ namespace SAM.Functions.ControlGift.Business.Models
         public List<DatesBeneficiary> Details { get; set; }
     }
 
-    public class DatesBeneficiary
-    {
-        public int BeneficiaryId { get; set; }
-
-        public string FullName { get; set; }
-
-        public string BeneficiaryType { get; set; }
-
-        public int Aports { get; set; }
-    }
+   
 }

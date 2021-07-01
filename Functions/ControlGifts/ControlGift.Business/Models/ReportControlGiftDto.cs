@@ -3,9 +3,5 @@
     public class ReportControlGiftDto
     {
         public int Total { get; set; }
-
-       
     }
-
-   
 }
