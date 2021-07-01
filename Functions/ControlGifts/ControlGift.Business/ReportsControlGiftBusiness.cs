@@ -3,13 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using SAM.Core.Business;
 using SAM.Functions.ControlGift.Business.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Security.Principal;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SAM.Functions.ControlGift.Business
 {

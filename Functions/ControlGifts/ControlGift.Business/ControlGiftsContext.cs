@@ -1,11 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SAM.Databases.DbSam.Core.Data;
 using SAM.Databases.DbSam.Core.Data.Context;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SAM.Functions.ControlGift.Business
 {
