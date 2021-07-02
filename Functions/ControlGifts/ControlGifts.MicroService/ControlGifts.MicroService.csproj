@@ -9,6 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ReportDatasets\**" />
+    <Content Remove="ReportDatasets\**" />
+    <EmbeddedResource Remove="ReportDatasets\**" />
+    <None Remove="ReportDatasets\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AspNetCore.Reporting" Version="2.1.0" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.13" />
   </ItemGroup>
@@ -18,10 +25,6 @@
     <ProjectReference Include="..\..\..\Core\Core.SwaggerConfig\Core.SwaggerConfig.csproj" />
     <ProjectReference Include="..\..\..\Databases\DbSam\Core.Data\Core.Data.csproj" />
     <ProjectReference Include="..\ControlGift.Business\ControlGift.Business.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ReportDatasets\" />
   </ItemGroup>
 
 </Project>

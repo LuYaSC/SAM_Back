@@ -40,5 +40,8 @@ namespace SAM.Functions.ControlGifts.MicroService.Controllers
 
         [HttpPost]
         public Result<GetGiftsDeliveredResult> GetAllGiftsDelivered([FromBody] GetGiftsDeliveredDto dto) => reports.GetAllGiftsDelivered(dto);
+
+        [HttpPost]
+        public byte[] TestReport() => reports.TestReport();
     }
 }

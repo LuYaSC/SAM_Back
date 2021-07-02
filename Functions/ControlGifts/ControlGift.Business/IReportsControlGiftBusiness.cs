@@ -10,5 +10,7 @@ namespace SAM.Functions.ControlGift.Business
         Result<GetGiftsDeliveredResult> GetMyGiftsDelivered(GetGiftsDeliveredDto dto);
 
         Result<GetGiftsDeliveredResult> GetAllGiftsDelivered(GetGiftsDeliveredDto dto);
+
+        byte[] TestReport();
     }
 }
