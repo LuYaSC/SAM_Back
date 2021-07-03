@@ -148,34 +148,6 @@ namespace SAM.Functions.ResolveCasesSiver.Business
             return result;
         }
 
-        //public byte[] GetReportAports(ResolveDiferenceDto dto)
-        //{
-        //    var listMinistery = Context.MinisterioDatos.Where(x => x.CARNET_AA == dto.DocumentNumber).ToList();
-        //    var b = listMinistery.GroupBy(d => d.FECHAAPORTES_AA)
-        //           .Select(
-        //           g => new MinisterioDato
-        //           {
-        //               Id = g.First().Id,
-        //               DESCUENTO_AA = g.Sum(s => decimal.Parse(s.DESCUENTO_AA)).ToString(),
-        //               CARNET_AA = g.First().CARNET_AA,
-        //               FECHAAPORTES_AA = g.First().FECHAAPORTES_AA,
-        //               ITEM_AA = g.Count().ToString(),
-        //               NOMBRE1_AA = g.First().NOMBRE1_AA,
-        //               NOMBRE2_AA = g.First().NOMBRE2_AA,
-        //               MATERNO_AA = g.First().MATERNO_AA,
-        //               PATERNO_AA = g.First().PATERNO_AA,
-        //               CATEGORIA = g.First().CATEGORIA,
-        //               PROGRAMA_AA = g.First().PROGRAMA_AA,
-        //               SERVICIO_AA = g.First().SERVICIO_AA,
-        //               SUELDO_AA = g.First().SUELDO_AA,
-
-        //           });
-        //    int count = 0;
-
-        //}
-
-        //public decimal GetSalary
-
         public List<ResolveDiferenceMassiveResult> GetCaseDataMassive(ResolveDiferenceDto dto)
         {
             List<ResolveDiferenceMassiveResult> result = new List<ResolveDiferenceMassiveResult>();
@@ -201,7 +173,6 @@ namespace SAM.Functions.ResolveCasesSiver.Business
                             PROGRAMA_AA = g.First().PROGRAMA_AA,
                             SERVICIO_AA = g.First().SERVICIO_AA,
                             SUELDO_AA = g.First().SUELDO_AA,
-
                         });
                 int count = 0;
                 string name = string.Empty;
@@ -236,10 +207,8 @@ namespace SAM.Functions.ResolveCasesSiver.Business
                     ScriptMYSQL = scriptMYSQL,
                     ///ScriptSQLSERVER = sQLScript,
                     MissingData = count
-
                 });
             }
-
             return result;
         }
 
@@ -361,9 +330,7 @@ namespace SAM.Functions.ResolveCasesSiver.Business
                     $"(0, {dto.DocumentNumber}, '{lastMat.concatenado}', '{minData.DESCUENTO_AP}', '{minData.FECHA_AP.ToString("yyyy-MM-dd")}', {minData.FECHA_AP.ToString("MM")});";
             }
             result.TotalAports = MinisteryData.Count;
-
             return result;
-
         }
 
         public ResolveDiferenceMassiveResult CompletePassiveAports(GetPassiveAportsDto dto)
