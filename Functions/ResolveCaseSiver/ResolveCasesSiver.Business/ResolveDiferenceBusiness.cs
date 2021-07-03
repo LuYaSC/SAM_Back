@@ -243,6 +243,78 @@ namespace SAM.Functions.ResolveCasesSiver.Business
             return result;
         }
 
+        public GetPassiveAportsResponse UnificationActiveAports(GetActiveAportsDto dto)
+        {
+            GetPassiveAportsResponse result = new GetPassiveAportsResponse();
+            var firtMat = Context.MumanalFullActiveBeneficiaries.Where(x => x.cedula_identidad == dto.DocumentNumber[0]).FirstOrDefault();
+            var lastMat = Context.MumanalFullActiveBeneficiaries.Where(x => x.cedula_identidad == dto.DocumentNumber[1]).FirstOrDefault();
+            List<MinistryActiveContribution> firstBefMinisteryData = new List<MinistryActiveContribution>();
+            List<MinistryActiveContribution> lastBefMinisteryData = new List<MinistryActiveContribution>();
+            result.DisableOldEnrollment = $"update afiliado_activo set cedula_identidad = '{firtMat.cedula_identidad}000', cod_base = {firtMat.cod_base}000 "+
+                $"where cedula_identidad = '{firtMat.cedula_identidad}' and cod_base = '{firtMat.cod_base}';";
+
+            for (int i = 2003; i <= DateTime.Now.Year; i++)
+            {
+                result.ScriptDisableFirstMat += $"update aporte_activo_{i} set codbase = {firtMat.cod_base}000 , cedula_identidad = {firtMat.cedula_identidad}000, obs = 'Deshabilitado por unificacion'" +
+                    $"where cedula_identidad = {firtMat.cedula_identidad} and cod_base = {firtMat.cod_base};";
+
+                result.ScriptDisableFirstConcat += $"update aporte_activo_{i} set codbase = {lastMat.cod_base}000 , cedula_identidad = {lastMat.cedula_identidad}000, obs = 'Deshabilitado por unificacion'" +
+                    $"where cedula_identidad = {lastMat.cedula_identidad} and cod_base = {lastMat.cod_base};";
+
+            }
+            firstBefMinisteryData = Context.MinistryActiveContributions.Where(x => x.CARNET_AA == firtMat.cedula_identidad).ToList();
+            var groupFirst = firstBefMinisteryData.GroupBy(d => d.FECHAAPORTES_AA)
+                        .Select(
+                        g => new MinistryActiveContribution
+                        {
+                            Id = g.First().Id,
+                            DESCUENTO_AA = g.Sum(s => decimal.Parse(s.DESCUENTO_AA)).ToString(),
+                            CARNET_AA = g.First().CARNET_AA,
+                            FECHAAPORTES_AA = g.First().FECHAAPORTES_AA,
+                            ITEM_AA = g.Count().ToString(),
+                            NOMBRE1_AA = g.First().NOMBRE1_AA,
+                            NOMBRE2_AA = g.First().NOMBRE2_AA,
+                            MATERNO_AA = g.First().MATERNO_AA,
+                            PATERNO_AA = g.First().PATERNO_AA,
+                            CATEGORIA = g.First().CATEGORIA,
+                            PROGRAMA_AA = g.First().PROGRAMA_AA,
+                            SERVICIO_AA = g.First().SERVICIO_AA,
+                            SUELDO_AA = g.First().SUELDO_AA,
+
+                        });
+            lastBefMinisteryData = Context.MinistryActiveContributions.Where(x => x.CARNET_AA == lastMat.cedula_identidad).ToList();
+            var groupLast = lastBefMinisteryData.GroupBy(d => d.FECHAAPORTES_AA)
+                        .Select(
+                        g => new MinistryActiveContribution
+                        {
+                            Id = g.First().Id,
+                            DESCUENTO_AA = g.Sum(s => decimal.Parse(s.DESCUENTO_AA)).ToString(),
+                            CARNET_AA = g.First().CARNET_AA,
+                            FECHAAPORTES_AA = g.First().FECHAAPORTES_AA,
+                            ITEM_AA = g.Count().ToString(),
+                            NOMBRE1_AA = g.First().NOMBRE1_AA,
+                            NOMBRE2_AA = g.First().NOMBRE2_AA,
+                            MATERNO_AA = g.First().MATERNO_AA,
+                            PATERNO_AA = g.First().PATERNO_AA,
+                            CATEGORIA = g.First().CATEGORIA,
+                            PROGRAMA_AA = g.First().PROGRAMA_AA,
+                            SERVICIO_AA = g.First().SERVICIO_AA,
+                            SUELDO_AA = g.First().SUELDO_AA,
+
+                        });
+            var aux = groupFirst.Concat(groupLast).ToList();
+            foreach (var minData in aux)
+            {
+                result.ScriptNewAports += $"INSERT INTO aporte_activo_{minData.FECHAAPORTES_AA.ToString("yyyy")} (cod_base, cedula_identidad, numbol, aporte, fecha, mes, ctacte) VALUES " +
+                    $"({lastMat.cod_base}, {lastMat.cedula_identidad}, '{minData.ITEM_AA}', '{minData.DESCUENTO_AA}', '{minData.FECHAAPORTES_AA.ToString("yyyy-MM-dd")}', " +
+                    $"{minData.FECHAAPORTES_AA.ToString("MM")});";
+            }
+            result.TotalAports = aux.Count;
+
+            return result;
+
+        }
+
         public GetPassiveAportsResponse UnificationPassiveAports(GetPassiveAportsDto dto)
         {
             GetPassiveAportsResponse result = new GetPassiveAportsResponse();

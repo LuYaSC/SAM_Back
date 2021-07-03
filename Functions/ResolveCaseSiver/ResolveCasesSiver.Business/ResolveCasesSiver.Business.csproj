@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>SAM.Functions.ResolveCasesSiver.Business</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

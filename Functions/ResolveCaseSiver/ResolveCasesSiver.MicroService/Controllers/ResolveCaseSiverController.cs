@@ -44,5 +44,8 @@ namespace ResolveCaseContribution.MicroService.Controllers
         [HttpPost]
         public List<ResolveDiferenceMassiveResult> CompleteMassivePassiveAports(GetPassiveAportsDto dto) => business.CompleteMassivePassiveAports(dto);
 
+        [HttpPost]
+        public GetPassiveAportsResponse UnificationActiveAports([FromBody] GetActiveAportsDto dto) => business.UnificationActiveAports(dto);
+
     }
 }

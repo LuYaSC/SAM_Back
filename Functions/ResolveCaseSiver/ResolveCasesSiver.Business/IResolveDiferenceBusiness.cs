@@ -20,5 +20,7 @@ namespace SAM.Functions.ResolveCasesSiver.Business
         ResolveDiferenceMassiveResult CompletePassiveAports(GetPassiveAportsDto dto);
 
         List<ResolveDiferenceMassiveResult> CompleteMassivePassiveAports(GetPassiveAportsDto dto);
+
+        GetPassiveAportsResponse UnificationActiveAports(GetActiveAportsDto dto);
     }
 }

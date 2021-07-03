@@ -11,18 +11,24 @@ using System.Security.Principal;
 
 namespace SAM.Core.Reports
 {
-    public class BaseReport : IBaseReport
+    public class BaseReport<T, CONTEXT> : BaseBusiness<T, CONTEXT>
+             where T : class, IBase<int>
+             where CONTEXT : SAMContext
     {
+        public BaseReport(CONTEXT context, IPrincipal userInfo, IConfiguration configuration) : base(context, userInfo, configuration)
+        {
+        }
+
         public byte[] CreateReport()
         {
             try
             {
                 var pdfDoc = new Document(PageSize.LETTER, 40f, 40f, 60f, 60f);
-                string path = $"D:\\ReportsTest\\prueba{DateTime.Now.ToString("yyyyMMddmmss")}.pdf";
+                string path = $"G:\\ReportsTest\\prueba{DateTime.Now.ToString("yyyyMMddmmss")}.pdf";
                 PdfWriter.GetInstance(pdfDoc, new FileStream(path, FileMode.OpenOrCreate));
                 pdfDoc.Open();
 
-                var imagePath = $"D:\\ReportsTest\\logo mum.gif";
+                var imagePath = $"G:\\ReportsTest\\logo mum.jpeg";
                 using (FileStream fs = new FileStream(imagePath, FileMode.Open))
                 {
                     var png = Image.GetInstance(System.Drawing.Image.FromStream(fs), ImageFormat.Jpeg);
@@ -84,6 +90,7 @@ namespace SAM.Core.Reports
             {
 
             }
+            return new byte[0];
         }
     }
 }
