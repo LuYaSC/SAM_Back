@@ -3,6 +3,7 @@ using iTextSharp.text.pdf;
 using Microsoft.Extensions.Configuration;
 using SAM.Core.Business;
 using SAM.Core.DataDb;
+using SAM.Core.Reports.Models;
 using SAM.Databases.DbSam.Core.Data.Context;
 using System;
 using System.Drawing.Imaging;
@@ -19,7 +20,7 @@ namespace SAM.Core.Reports
         {
         }
 
-        public byte[] CreateReport()
+        public byte[] CreateReport(ReportDto dto)
         {
             try
             {
@@ -40,7 +41,7 @@ namespace SAM.Core.Reports
                 Paragraph title = new Paragraph();
                 title.Alignment = Element.ALIGN_CENTER;
                 title.Font = FontFactory.GetFont("Arial", 17);
-                title.Add("\n Reporte de Mochilas y Agendas entregadas\n");
+                title.Add($"\n {dto.Title} \n");
                 pdfDoc.Add(title);
 
                 var spacer = new Paragraph(string.Empty)
