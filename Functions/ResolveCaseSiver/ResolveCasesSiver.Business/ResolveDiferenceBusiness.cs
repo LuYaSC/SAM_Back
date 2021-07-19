@@ -39,8 +39,8 @@ namespace SAM.Functions.ResolveCasesSiver.Business
                         PROGRAMA_AA = g.First().PROGRAMA_AA,
                         SERVICIO_AA = g.First().SERVICIO_AA,
                         SUELDO_AA = g.First().SUELDO_AA,
-
                     });
+
             int count = 0;
             int countB = b.Count();
             foreach (var data in b)
@@ -224,11 +224,11 @@ namespace SAM.Functions.ResolveCasesSiver.Business
 
             for (int i = 2003; i <= DateTime.Now.Year; i++)
             {
-                result.ScriptDisableFirstMat += $"update aporte_activo_{i} set codbase = {firtMat.cod_base}000 , cedula_identidad = {firtMat.cedula_identidad}000, obs = 'Deshabilitado por unificacion'" +
-                    $"where cedula_identidad = {firtMat.cedula_identidad} and cod_base = {firtMat.cod_base};";
+                result.ScriptDisableFirstMat += $"update aporte_activo_{i} set cod_base = {firtMat.cod_base}000 , cedula_identidad = {firtMat.cedula_identidad}000" +
+                    $" where cedula_identidad = {firtMat.cedula_identidad} and cod_base = {firtMat.cod_base};";
 
-                result.ScriptDisableFirstConcat += $"update aporte_activo_{i} set codbase = {lastMat.cod_base}000 , cedula_identidad = {lastMat.cedula_identidad}000, obs = 'Deshabilitado por unificacion'" +
-                    $"where cedula_identidad = {lastMat.cedula_identidad} and cod_base = {lastMat.cod_base};";
+                result.ScriptDisableFirstConcat += $"update aporte_activo_{i} set codbase = {lastMat.cod_base}000 , cedula_identidad = {lastMat.cedula_identidad}000"+
+                    $" where cedula_identidad = {lastMat.cedula_identidad} and cod_base = {lastMat.cod_base};";
 
             }
             firstBefMinisteryData = Context.MinistryActiveContributions.Where(x => x.CARNET_AA == firtMat.cedula_identidad).ToList();
@@ -275,8 +275,8 @@ namespace SAM.Functions.ResolveCasesSiver.Business
             foreach (var minData in aux)
             {
                 result.ScriptNewAports += $"INSERT INTO aporte_activo_{minData.FECHAAPORTES_AA.ToString("yyyy")} (cod_base, cedula_identidad, numbol, aporte, fecha, mes, ctacte) VALUES " +
-                    $"({lastMat.cod_base}, {lastMat.cedula_identidad}, '{minData.ITEM_AA}', '{minData.DESCUENTO_AA}', '{minData.FECHAAPORTES_AA.ToString("yyyy-MM-dd")}', " +
-                    $"{minData.FECHAAPORTES_AA.ToString("MM")});";
+                    $"({lastMat.cod_base}, {lastMat.cedula_identidad}, {minData.ITEM_AA}, '{minData.DESCUENTO_AA}', '{minData.FECHAAPORTES_AA.ToString("yyyy-MM-dd")}', " +
+                    $"{minData.FECHAAPORTES_AA.ToString("MM")}, '');";
             }
             result.TotalAports = aux.Count;
 

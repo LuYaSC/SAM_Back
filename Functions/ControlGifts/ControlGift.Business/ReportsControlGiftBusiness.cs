@@ -77,7 +77,7 @@ namespace SAM.Functions.ControlGift.Business
                 });
             }
 
-            var listGroupGen = dates.GroupBy(d => d.BeneficiaryId)
+            var listGroupGen = dates.GroupBy(d => d.Beneficiary.DocumentNumber)
                   .Select(
                   g => new Databases.DbSam.Core.Data.ControlGift
                   {
