@@ -227,7 +227,7 @@ namespace SAM.Functions.ResolveCasesSiver.Business
                 result.ScriptDisableFirstMat += $"update aporte_activo_{i} set cod_base = {firtMat.cod_base}000 , cedula_identidad = {firtMat.cedula_identidad}000" +
                     $" where cedula_identidad = {firtMat.cedula_identidad} and cod_base = {firtMat.cod_base};";
 
-                result.ScriptDisableFirstConcat += $"update aporte_activo_{i} set codbase = {lastMat.cod_base}000 , cedula_identidad = {lastMat.cedula_identidad}000"+
+                result.ScriptDisableFirstConcat += $"update aporte_activo_{i} set cod_base = {lastMat.cod_base}000 , cedula_identidad = {lastMat.cedula_identidad}000"+
                     $" where cedula_identidad = {lastMat.cedula_identidad} and cod_base = {lastMat.cod_base};";
 
             }
@@ -288,7 +288,7 @@ namespace SAM.Functions.ResolveCasesSiver.Business
         {
             GetPassiveAportsResponse result = new GetPassiveAportsResponse();
             var beneficiaries = Context.MumanalPassiveBeneficiaries.Where(x => x.cedula_identidad == dto.DocumentNumber).ToList();
-            var lastMat = beneficiaries.Last();
+            var lastMat = beneficiaries[1];
             var firtMat = beneficiaries.First();
             List<MinistryPassiveContribution> MinisteryData = new List<MinistryPassiveContribution>();
             switch (dto.TypeSearch)
@@ -352,7 +352,7 @@ namespace SAM.Functions.ResolveCasesSiver.Business
                     result.Name = $"{data.NOMBRES_AP} {data.PATERNO_AP} {data.MATERNO_AP}";
                     result.DocumentNumber = data.CARNET_AP;
 
-                    result.ScriptMYSQL += $"INSERT INTO aporte_pasivo_ {newData.Substring(0, 4)}(cod_base, cedula_identidad, concatenado, aporte, fecha, mes) " +
+                    result.ScriptMYSQL += $"INSERT INTO aporte_pasivo_{newData.Substring(0, 4)}(cod_base, cedula_identidad, concatenado, aporte, fecha, mes) " +
                         $" values('{user.cod_base}', '{data.CARNET_AP}', '{user.concatenado}', '{data.DESCUENTO_AP}','{newData}', {month});";
                 }
             }

@@ -147,7 +147,7 @@ namespace SAM.Functions.ControlGift.Business
 
         public byte[] TestReport()
         {
-            this.CreateReport();
+            //this.CreateReport();
             return new byte[0];
         }
     }
