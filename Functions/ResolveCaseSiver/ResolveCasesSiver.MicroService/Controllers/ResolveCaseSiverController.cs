@@ -47,5 +47,8 @@ namespace ResolveCaseContribution.MicroService.Controllers
         [HttpPost]
         public GetPassiveAportsResponse UnificationActiveAports([FromBody] GetActiveAportsDto dto) => business.UnificationActiveAports(dto);
 
+        [HttpPost]
+        public GetPassiveAportsResponse UnificationPassive([FromBody] GetPassiveAportsDto dto) => business.UnificationPassive(dto);
+
     }
 }

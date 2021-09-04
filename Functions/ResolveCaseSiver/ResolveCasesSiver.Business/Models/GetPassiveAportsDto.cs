@@ -10,5 +10,9 @@ namespace SAM.Functions.ResolveCasesSiver.Business.Models
         public string DocumentNumber { get; set; }
 
         public int TypeSearch { get; set; }
+
+        public string FirstEnrollment { get; set; }
+
+        public string SecondEnrollment { get; set; }
     }
 }

@@ -288,7 +288,7 @@ namespace SAM.Functions.ResolveCasesSiver.Business
         {
             GetPassiveAportsResponse result = new GetPassiveAportsResponse();
             var beneficiaries = Context.MumanalPassiveBeneficiaries.Where(x => x.cedula_identidad == dto.DocumentNumber).ToList();
-            var lastMat = beneficiaries[1];
+            var lastMat = beneficiaries.Last();
             var firtMat = beneficiaries.First();
             List<MinistryPassiveContribution> MinisteryData = new List<MinistryPassiveContribution>();
             switch (dto.TypeSearch)
@@ -365,6 +365,49 @@ namespace SAM.Functions.ResolveCasesSiver.Business
             throw new NotImplementedException();
         }
 
-       
+        public GetPassiveAportsResponse UnificationPassive(GetPassiveAportsDto dto)
+        {
+            GetPassiveAportsResponse result = new GetPassiveAportsResponse();
+            List<MinistryPassiveContribution> MinisteryData = new List<MinistryPassiveContribution>();
+            switch (dto.TypeSearch)
+            {
+                case 1: //Search Titular Enrollment
+                    var list1 = Context.MinistryPassiveContributions.Where(x => x.T_MATRICULA_AP.Contains(dto.FirstEnrollment) && x.B_MATRICULA_AP == string.Empty).ToList();
+                    var list2 = Context.MinistryPassiveContributions.Where(x => x.T_MATRICULA_AP.Contains(dto.SecondEnrollment) && x.B_MATRICULA_AP == string.Empty).ToList();
+                    MinisteryData = list1.Concat(list2).ToList();
+                    break;
+                case 2: //Search Beneficiary Enrollment
+                    //var list3 = Context.MinistryPassiveContributions.Where(x => x.B_MATRICULA_AP.Contains(firtMat.mat_beneficiario)).ToList();
+                    //var list4 = Context.MinistryPassiveContributions.Where(x => x.B_MATRICULA_AP.Contains(lastMat.mat_beneficiario)).ToList();
+                    //MinisteryData = list3.Concat(list4).ToList();
+                    break;
+            }
+
+            //var enrollment = $"{(dto.TypeSearch == 2 ? "mat_titular =" + "'" + (dto.FirstEnrollment) + "X'" : "mat_beneficiaro = " + "'" + (firtMat.mat_beneficiario) + "X'")}";
+            //result.DisableOldEnrollment = $"update afiliado_pasivo set cedula_identidad = '{dto.DocumentNumber}(dis)', {enrollment}, concatenado = '{fi.concatenado}(dis)'" +
+            //    $"where cedula_identidad = '{dto.DocumentNumber}' and concatenado = '{firtMat.concatenado}';";
+
+            for (int i = 2003; i <= 2021; i++)
+            {
+                result.ScriptDisableFirstMat += $"delete from aporte_pasivo_{i} " +
+                    $"where cedula_identidad = {dto.DocumentNumber};";
+
+                result.ScriptDisableFirstConcat += $"delete from aporte_pasivo_{i} " +
+                    $"where concatenado = '{dto.FirstEnrollment}{dto.DocumentNumber}';";
+
+                result.ScriptDisableLastConcat += $"delete from aporte_pasivo_{i} " +
+                         $"where concatenado = '{dto.SecondEnrollment}{dto.DocumentNumber}';";
+            }
+
+            foreach (var minData in MinisteryData)
+            {
+                result.ScriptNewAports += $"INSERT INTO aporte_pasivo_{minData.FECHA_AP.ToString("yyyy")} (cod_base, cedula_identidad, concatenado, aporte, fecha, mes) VALUES " +
+                    $"(0, {dto.DocumentNumber}, '{dto.SecondEnrollment}{dto.DocumentNumber}', '{minData.DESCUENTO_AP}', '{minData.FECHA_AP.ToString("yyyy-MM-dd")}', {minData.FECHA_AP.ToString("MM")});";
+            }
+            result.TotalAports = MinisteryData.Count;
+            return result;
+        }
+
+
     }
 }
