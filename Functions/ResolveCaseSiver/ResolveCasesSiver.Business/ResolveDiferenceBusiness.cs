@@ -297,8 +297,8 @@ namespace SAM.Functions.ResolveCasesSiver.Business
                     MinisteryData = Context.MinistryPassiveContributions.Where(x => x.CARNET_AP == dto.DocumentNumber).ToList();
                     break;
                 case 2: //Search Titular Enrollment
-                    var list1 = Context.MinistryPassiveContributions.Where(x => x.T_MATRICULA_AP.Contains(firtMat.mat_titular)).ToList();
-                    var list2 = Context.MinistryPassiveContributions.Where(x => x.T_MATRICULA_AP.Contains(lastMat.mat_titular)).ToList();
+                    var list1 = Context.MinistryPassiveContributions.Where(x => x.T_MATRICULA_AP.Contains(firtMat.mat_titular) && x.B_MATRICULA_AP == string.Empty).ToList();
+                    var list2 = Context.MinistryPassiveContributions.Where(x => x.T_MATRICULA_AP.Contains(lastMat.mat_titular) && x.B_MATRICULA_AP == string.Empty).ToList();
                     MinisteryData = list1.Concat(list2).ToList();
                     break;
                 case 3: //Search Beneficiary Enrollment
