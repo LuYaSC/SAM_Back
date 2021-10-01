@@ -10,13 +10,14 @@ using System.Threading.Tasks;
 
 namespace SAM.Functions.ResolveCasesSiver.Business
 {
-    public class ResolveDiferenceBusiness : BaseBusiness<Beneficiary, ResolveCasesSiverContext> , IResolveDiferenceBusiness
+    public class ResolveDiferenceBusiness : BaseBusiness<Beneficiary, ResolveCasesSiverContext>, IResolveDiferenceBusiness
     {
         public ResolveDiferenceBusiness(ResolveCasesSiverContext context, IPrincipal userInfo, IConfiguration configuration = null) : base(context, userInfo, configuration)
         {
         }
 
         public Result<ResolveDiferenceResult> GetCaseData(ResolveDiferenceDto dto)
+
         {
             ResolveDiferenceResult result = new ResolveDiferenceResult();
             var listSiver = Context.MumanalActiveContributions.Where(x => x.cedula_identidad == dto.DocumentNumber).ToList();
@@ -212,6 +213,33 @@ namespace SAM.Functions.ResolveCasesSiver.Business
             return result;
         }
 
+        public GetPassiveAportsResponse UnificationActiveAportsSeverancePay(GetActiveAportsDto dto)
+        {
+            GetPassiveAportsResponse result = new GetPassiveAportsResponse();
+            var firtMat = Context.MumanalFullActiveBeneficiaries.Where(x => x.cedula_identidad == dto.DocumentNumber[0]).FirstOrDefault();
+            var lastMat = Context.MumanalFullActiveBeneficiaries.Where(x => x.cedula_identidad == dto.DocumentNumber[1]).FirstOrDefault();
+            List<MinistryActiveContribution> firstBefMinisteryData = new List<MinistryActiveContribution>();
+            List<MinistryActiveContribution> lastBefMinisteryData = new List<MinistryActiveContribution>();
+
+            for (int i = 2003; i <= DateTime.Now.Year; i++)
+            {
+                result.ScriptDisableFirstMat += $"delete from descuentos_{i} where codigobase = '{firtMat.cod_base}';";
+                result.ScriptDisableSecondMat += $"delete from descuentos_{i} where codigobase = '{lastMat.cod_base}';";
+            }
+            firstBefMinisteryData = Context.MinistryActiveContributions.Where(x => x.CARNET_AA == firtMat.cedula_identidad).ToList();
+            lastBefMinisteryData = Context.MinistryActiveContributions.Where(x => x.CARNET_AA == lastMat.cedula_identidad).ToList();
+            var totalData = firstBefMinisteryData.Concat(lastBefMinisteryData).ToList();
+            foreach (var minData in totalData)
+            {
+                result.ScriptNewAports += $"INSERT INTO descuentos_{minData.FECHAAPORTES_AA.ToString("yyyy")} (codigobase, descuento, fecha, mes, sueldo) VALUES " +
+                    $"({lastMat.cod_base}, '{minData.DESCUENTO_AA}', '{minData.FECHAAPORTES_AA.ToString("yyyy-MM-dd")}', " +
+                    $"{minData.FECHAAPORTES_AA.ToString("MM")}, '{minData.SUELDO_AA}');";
+            }
+            result.TotalAports = totalData.Count;
+            return result;
+
+        }
+
         public GetPassiveAportsResponse UnificationActiveAports(GetActiveAportsDto dto)
         {
             GetPassiveAportsResponse result = new GetPassiveAportsResponse();
@@ -219,7 +247,7 @@ namespace SAM.Functions.ResolveCasesSiver.Business
             var lastMat = Context.MumanalFullActiveBeneficiaries.Where(x => x.cedula_identidad == dto.DocumentNumber[1]).FirstOrDefault();
             List<MinistryActiveContribution> firstBefMinisteryData = new List<MinistryActiveContribution>();
             List<MinistryActiveContribution> lastBefMinisteryData = new List<MinistryActiveContribution>();
-            result.DisableOldEnrollment = $"update afiliado_activo set cedula_identidad = '{firtMat.cedula_identidad}000', cod_base = {firtMat.cod_base}000 "+
+            result.DisableOldEnrollment = $"update afiliado_activo set cedula_identidad = '{firtMat.cedula_identidad}000', cod_base = {firtMat.cod_base}000 " +
                 $"where cedula_identidad = '{firtMat.cedula_identidad}' and cod_base = '{firtMat.cod_base}';";
 
             for (int i = 2003; i <= DateTime.Now.Year; i++)
@@ -227,7 +255,7 @@ namespace SAM.Functions.ResolveCasesSiver.Business
                 result.ScriptDisableFirstMat += $"update aporte_activo_{i} set cod_base = {firtMat.cod_base}000 , cedula_identidad = {firtMat.cedula_identidad}000" +
                     $" where cedula_identidad = {firtMat.cedula_identidad} and cod_base = {firtMat.cod_base};";
 
-                result.ScriptDisableFirstConcat += $"update aporte_activo_{i} set cod_base = {lastMat.cod_base}000 , cedula_identidad = {lastMat.cedula_identidad}000"+
+                result.ScriptDisableFirstConcat += $"update aporte_activo_{i} set cod_base = {lastMat.cod_base}000 , cedula_identidad = {lastMat.cedula_identidad}000" +
                     $" where cedula_identidad = {lastMat.cedula_identidad} and cod_base = {lastMat.cod_base};";
 
             }
@@ -279,9 +307,7 @@ namespace SAM.Functions.ResolveCasesSiver.Business
                     $"{minData.FECHAAPORTES_AA.ToString("MM")}, '');";
             }
             result.TotalAports = aux.Count;
-
             return result;
-
         }
 
         public GetPassiveAportsResponse UnificationPassiveAports(GetPassiveAportsDto dto)

@@ -62,7 +62,7 @@ namespace SAM.Functions.ControlGift.Business
                        UserModification = g.First().UserModification,
                        Observations = g.First().Observations,
                        IsDeleted = g.First().IsDeleted
-                   });
+                   }); 
 
                 if (listGroup.FirstOrDefault() == null) continue;
 

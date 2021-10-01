@@ -24,5 +24,7 @@ namespace SAM.Functions.ResolveCasesSiver.Business
         GetPassiveAportsResponse UnificationActiveAports(GetActiveAportsDto dto);
 
         GetPassiveAportsResponse UnificationPassive(GetPassiveAportsDto dto);
+
+        GetPassiveAportsResponse UnificationActiveAportsSeverancePay(GetActiveAportsDto dto);
     }
 }

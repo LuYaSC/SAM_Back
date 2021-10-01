@@ -13,6 +13,8 @@ namespace SAM.Functions.ResolveCasesSiver.Business.Models
 
         public string ScriptDisableFirstMat { get; set; }
 
+        public string ScriptDisableSecondMat { get; set; }
+
         public string ScriptDisableFirstConcat { get; set; }
 
         public string ScriptDisableLastConcat { get; set; }
